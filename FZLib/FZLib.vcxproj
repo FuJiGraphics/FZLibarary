@@ -75,7 +75,9 @@
     <PreBuildEvent>
       <Command>IF NOT EXIST "..\Dist\lib\Debug\x86_64\" (mkdir "..\Dist\lib\Debug\x86_64\")
 IF NOT EXIST "..\Dist\include\" (mkdir "..\Dist\include\")
-copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\"</Command>
+IF NOT EXIST "..\Dist\include\FZLib" (mkdir "..\Dist\include\FZLib")
+IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
+copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Debug\x86_64\"
@@ -109,7 +111,9 @@ del "..\Dist\log\**.idb" "..\Dist\log\**.pdb" "..\Dist\log\**.pch"</Command>
     <PreBuildEvent>
       <Command>IF NOT EXIST "..\Dist\lib\Release\x86_64\" (mkdir "..\Dist\lib\Release\x86_64\")
 IF NOT EXIST "..\Dist\include\" (mkdir "..\Dist\include\")
-copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\"</Command>
+IF NOT EXIST "..\Dist\include\FZLib" (mkdir "..\Dist\include\FZLib")
+IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
+copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Release\x86_64\"

@@ -28,7 +28,9 @@ workspace "FZLib"
 	{
 		"{MKDIR} %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
 		"{MKDIR} %[Dist/include/]",
-		"{COPYFILE} %["..helperDir.."/**.h] %[Dist/include/]",
+		"{MKDIR} %[Dist/include/FZLib]",
+		"{MKDIR} %[Dist/include/FZLib/Helpers]",
+		"{COPYFILE} %["..helperDir.."/**.h] %[Dist/include/FZLib/Helpers/]",
 	}
 
 	defines
