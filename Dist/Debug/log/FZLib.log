@@ -1,0 +1,14 @@
+﻿  ..\FZLib\Helpers\StringHelper.h
+          1개 파일이 복사되었습니다.
+  pch.cpp
+  dllmain.cpp
+  StringHelper.cpp
+d:\dev\fzlib\fzlib\helpers\stringhelper.cpp(7): warning C4273: 'FZLib::StringHelper::StringToLPCWSTR': dll 링크가 일치하지 않습니다.
+  d:\dev\fzlib\fzlib\helpers\stringhelper.h(16): note: 'StringToLPCWSTR'의 이전 정의를 참조하십시오.
+  코드를 생성하고 있습니다...
+     ..\Dist\Debug\log\FZLib.lib 라이브러리 및 ..\Dist\Debug\log\FZLib.exp 개체를 생성하고 있습니다.
+  FZLib.vcxproj -> D:\Dev\FZLib\FZLib\..\Dist\Debug\log\FZLib.dll
+  ..\Dist\Debug\log\FZLib.lib
+          1개 파일이 복사되었습니다.
+  ..\Dist\Debug\log\FZLib.dll
+          1개 파일이 복사되었습니다.

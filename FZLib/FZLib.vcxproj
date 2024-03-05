@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BC5E240D-2873-4CBE-F1F4-EF1D5DC848EF}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>FZLib</RootNamespace>
+    <LatestTargetPlatformVersion>$([Microsoft.Build.Utilities.ToolLocationHelper]::GetLatestSDKTargetPlatformVersion('Windows', '10.0'))</LatestTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\Dist\Debug\log\</OutDir>
+    <IntDir>..\Dist\Debug\log\</IntDir>
+    <TargetName>FZLib</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\Dist\Release\log\</OutDir>
+    <IntDir>..\Dist\Release\log\</IntDir>
+    <TargetName>FZLib</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>FZ_PLATFORM_WINDOWS;FZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;EntryPoint;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>..\Dist\Debug\log\FZLib.lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>IF NOT EXIST "..\Dist\Debug\lib\" (mkdir "..\Dist\Debug\lib\")
+IF NOT EXIST "..\Dist\Debug\include\" (mkdir "..\Dist\Debug\include\")
+copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\Debug\include\"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /B /Y "..\Dist\Debug\log\**.lib" "..\Dist\Debug\lib\"
+copy /B /Y "..\Dist\Debug\log\**.dll" "..\Dist\Debug\lib\"
+del "..\Dist\Debug\log\**.dll" "..\Dist\Debug\log\**.lib"
+del "..\Dist\Debug\log\**.obj" "..\Dist\Debug\log\**.ilk" "..\Dist\Debug\log\**.exp"
+del "..\Dist\Debug\log\**.idb" "..\Dist\Debug\log\**.pdb" "..\Dist\Debug\log\**.pch"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>FZ_PLATFORM_WINDOWS;FZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;EntryPoint;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ImportLibrary>..\Dist\Release\log\FZLib.lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>IF NOT EXIST "..\Dist\Release\lib\" (mkdir "..\Dist\Release\lib\")
+IF NOT EXIST "..\Dist\Release\include\" (mkdir "..\Dist\Release\include\")
+copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\Release\include\"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy /B /Y "..\Dist\Release\log\**.lib" "..\Dist\Release\lib\"
+copy /B /Y "..\Dist\Release\log\**.dll" "..\Dist\Release\lib\"
+del "..\Dist\Release\log\**.dll" "..\Dist\Release\log\**.lib"
+del "..\Dist\Release\log\**.obj" "..\Dist\Release\log\**.ilk" "..\Dist\Release\log\**.exp"
+del "..\Dist\Release\log\**.idb" "..\Dist\Release\log\**.pdb" "..\Dist\Release\log\**.pch"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="EntryPoint\framework.h" />
+    <ClInclude Include="EntryPoint\pch.h" />
+    <ClInclude Include="Helpers\StringHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EntryPoint\dllmain.cpp" />
+    <ClCompile Include="EntryPoint\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Helpers\StringHelper.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
