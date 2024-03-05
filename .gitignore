@@ -1,2 +1,4 @@
 .vs/**
+FZLib/Dist/Debug/log/**
+FZLib/Dist/Release/log/**
 FZLib.sln
