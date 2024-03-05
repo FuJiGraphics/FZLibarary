@@ -3,6 +3,8 @@
   pch.cpp
   dllmain.cpp
   StringHelper.cpp
+d:\dev\fzlib\fzlib\helpers\stringhelper.h(20): warning C4190: 'StringToLPCWSTR'에 C 링크를 지정했으나 C와 호환되지 않는 UDT 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'을(를) 반환합니다.
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\xstring(4374): note: 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' 선언을 참조하십시오.
   코드를 생성하고 있습니다...
      ..\Dist\log\FZLib.lib 라이브러리 및 ..\Dist\log\FZLib.exp 개체를 생성하고 있습니다.
   FZLib.vcxproj -> D:\Dev\FZLib\FZLib\..\Dist\log\FZLib.dll
