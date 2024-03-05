@@ -8,7 +8,6 @@ workspace "FZLib"
 		"Release"
 	}
 	
-	outputDir = "Dist/%{cfg.buildcfg}/"
 	helperDir = "FZLib/Helpers/"
 
 	project "FZLib"
@@ -19,17 +18,17 @@ workspace "FZLib"
 		staticruntime "off"
     systemversion "latest"  
 
-    targetdir (outputDir.."/log/")
-    objdir (outputDir.."/log/")
+    targetdir ("Dist/log/")
+    objdir ("Dist/log/")
 
     pchheader "pch.h"
     pchsource "%{prj.name}/EntryPoint/pch.cpp"
 	
 	prebuildcommands
 	{
-		"{MKDIR} %["..outputDir.."/lib/%{cfg.architecture}/]",
-		"{MKDIR} %["..outputDir.."/include/]",
-		"{COPYFILE} %["..helperDir.."/**.h] %["..outputDir.."/include/]",
+		"{MKDIR} %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
+		"{MKDIR} %[Dist/include/]",
+		"{COPYFILE} %["..helperDir.."/**.h] %[Dist/include/]",
 	}
 
 	defines
@@ -51,11 +50,11 @@ workspace "FZLib"
 
 	postbuildcommands 
 	{ 
-		"{COPYFILE} %["..outputDir.."/log/**.lib] %["..outputDir.."/lib/%{cfg.architecture}/]",
-		"{COPYFILE} %["..outputDir.."/log/**.dll] %["..outputDir.."/lib/%{cfg.architecture}/]",
-		"{DELETE} %["..outputDir.."/log/**.dll] %["..outputDir.."/log/**.lib]",
-		"{DELETE} %["..outputDir.."/log/**.obj] %["..outputDir.."/log/**.ilk] %["..outputDir.."/log/**.exp]",
-		"{DELETE} %["..outputDir.."/log/**.idb] %["..outputDir.."/log/**.pdb] %["..outputDir.."/log/**.pch]",
+		"{COPYFILE} %[Dist/log/**.lib] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
+		"{COPYFILE} %[Dist/log/**.dll] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
+		"{DELETE} %[Dist/log/**.dll] %[Dist/log/**.lib]",
+		"{DELETE} %[Dist/log/**.obj] %[Dist/log/**.ilk] %[Dist/log/**.exp]",
+		"{DELETE} %[Dist/log/**.idb] %[Dist/log/**.pdb] %[Dist/log/**.pch]",
 	}
 
     filter "system:Windows"
