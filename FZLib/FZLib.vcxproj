@@ -60,7 +60,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>FZ_PLATFORM_WINDOWS;FZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FZLIB_EXPORTS;FZ_PLATFORM_WINDOWS;FZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;EntryPoint;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -73,13 +73,13 @@
       <ImportLibrary>..\Dist\Debug\log\FZLib.lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>IF NOT EXIST "..\Dist\Debug\lib\" (mkdir "..\Dist\Debug\lib\")
+      <Command>IF NOT EXIST "..\Dist\Debug\lib\x86_64\" (mkdir "..\Dist\Debug\lib\x86_64\")
 IF NOT EXIST "..\Dist\Debug\include\" (mkdir "..\Dist\Debug\include\")
 copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\Debug\include\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy /B /Y "..\Dist\Debug\log\**.lib" "..\Dist\Debug\lib\"
-copy /B /Y "..\Dist\Debug\log\**.dll" "..\Dist\Debug\lib\"
+      <Command>copy /B /Y "..\Dist\Debug\log\**.lib" "..\Dist\Debug\lib\x86_64\"
+copy /B /Y "..\Dist\Debug\log\**.dll" "..\Dist\Debug\lib\x86_64\"
 del "..\Dist\Debug\log\**.dll" "..\Dist\Debug\log\**.lib"
 del "..\Dist\Debug\log\**.obj" "..\Dist\Debug\log\**.ilk" "..\Dist\Debug\log\**.exp"
 del "..\Dist\Debug\log\**.idb" "..\Dist\Debug\log\**.pdb" "..\Dist\Debug\log\**.pch"</Command>
@@ -90,7 +90,7 @@ del "..\Dist\Debug\log\**.idb" "..\Dist\Debug\log\**.pdb" "..\Dist\Debug\log\**.
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>FZ_PLATFORM_WINDOWS;FZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>FZLIB_EXPORTS;FZ_PLATFORM_WINDOWS;FZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;EntryPoint;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -107,13 +107,13 @@ del "..\Dist\Debug\log\**.idb" "..\Dist\Debug\log\**.pdb" "..\Dist\Debug\log\**.
       <ImportLibrary>..\Dist\Release\log\FZLib.lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
-      <Command>IF NOT EXIST "..\Dist\Release\lib\" (mkdir "..\Dist\Release\lib\")
+      <Command>IF NOT EXIST "..\Dist\Release\lib\x86_64\" (mkdir "..\Dist\Release\lib\x86_64\")
 IF NOT EXIST "..\Dist\Release\include\" (mkdir "..\Dist\Release\include\")
 copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\Release\include\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy /B /Y "..\Dist\Release\log\**.lib" "..\Dist\Release\lib\"
-copy /B /Y "..\Dist\Release\log\**.dll" "..\Dist\Release\lib\"
+      <Command>copy /B /Y "..\Dist\Release\log\**.lib" "..\Dist\Release\lib\x86_64\"
+copy /B /Y "..\Dist\Release\log\**.dll" "..\Dist\Release\lib\x86_64\"
 del "..\Dist\Release\log\**.dll" "..\Dist\Release\log\**.lib"
 del "..\Dist\Release\log\**.obj" "..\Dist\Release\log\**.ilk" "..\Dist\Release\log\**.exp"
 del "..\Dist\Release\log\**.idb" "..\Dist\Release\log\**.pdb" "..\Dist\Release\log\**.pch"</Command>

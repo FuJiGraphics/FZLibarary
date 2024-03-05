@@ -27,9 +27,14 @@ workspace "FZLib"
 	
 	prebuildcommands
 	{
-		"{MKDIR} %["..outputDir.."/lib/]",
+		"{MKDIR} %["..outputDir.."/lib/%{cfg.architecture}/]",
 		"{MKDIR} %["..outputDir.."/include/]",
 		"{COPYFILE} %["..helperDir.."/**.h] %["..outputDir.."/include/]",
+	}
+
+	defines
+	{
+		"FZLIB_EXPORTS",
 	}
 
     files
@@ -46,8 +51,8 @@ workspace "FZLib"
 
 	postbuildcommands 
 	{ 
-		"{COPYFILE} %["..outputDir.."/log/**.lib] %["..outputDir.."/lib/]",
-		"{COPYFILE} %["..outputDir.."/log/**.dll] %["..outputDir.."/lib/]",
+		"{COPYFILE} %["..outputDir.."/log/**.lib] %["..outputDir.."/lib/%{cfg.architecture}/]",
+		"{COPYFILE} %["..outputDir.."/log/**.dll] %["..outputDir.."/lib/%{cfg.architecture}/]",
 		"{DELETE} %["..outputDir.."/log/**.dll] %["..outputDir.."/log/**.lib]",
 		"{DELETE} %["..outputDir.."/log/**.obj] %["..outputDir.."/log/**.ilk] %["..outputDir.."/log/**.exp]",
 		"{DELETE} %["..outputDir.."/log/**.idb] %["..outputDir.."/log/**.pdb] %["..outputDir.."/log/**.pch]",
