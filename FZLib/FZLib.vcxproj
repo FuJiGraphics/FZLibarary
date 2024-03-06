@@ -61,7 +61,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>FZLIB_EXPORTS;FZ_PLATFORM_WINDOWS;FZ_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;EntryPoint;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;EntryPoint;Vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -70,6 +70,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Vendor\spdlog\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\Dist\log\FZLib.lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -77,14 +79,24 @@
 IF NOT EXIST "..\Dist\include\" (mkdir "..\Dist\include\")
 IF NOT EXIST "..\Dist\include\FZLib" (mkdir "..\Dist\include\FZLib")
 IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
-copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"</Command>
+IF NOT EXIST "..\Dist\include\spdlog" (mkdir "..\Dist\include\spdlog")
+IF NOT EXIST "..\Dist\include\spdlog\cfg" (mkdir "..\Dist\include\spdlog\cfg")
+IF NOT EXIST "..\Dist\include\spdlog\details" (mkdir "..\Dist\include\spdlog\details")
+IF NOT EXIST "..\Dist\include\spdlog\fmt" (mkdir "..\Dist\include\spdlog\fmt")
+IF NOT EXIST "..\Dist\include\spdlog\fmt\bundled" (mkdir "..\Dist\include\spdlog\fmt\bundled")
+IF NOT EXIST "..\Dist\include\spdlog\sinks" (mkdir "..\Dist\include\spdlog\sinks")
+copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h" "..\Dist\include\spdlog\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h" "..\Dist\include\spdlog\cfg\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h" "..\Dist\include\spdlog\details\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\**.h" "..\Dist\include\spdlog\fmt\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\**.h" "..\Dist\include\spdlog\fmt\bundled\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\sinks\**.h" "..\Dist\include\spdlog\sinks\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Debug\x86_64\"
 copy /B /Y "..\Dist\log\**.dll" "..\Dist\lib\Debug\x86_64\"
-del "..\Dist\log\**.dll" "..\Dist\log\**.lib"
-del "..\Dist\log\Debug\**.obj" "..\Dist\log\**.ilk" "..\Dist\log\**.exp"
-del "..\Dist\log\**.idb" "..\Dist\log\Debug\**.pdb" "..\Dist\log\Debug\**.pch"</Command>
+rmdir /S /Q "..\Dist\log\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,7 +105,7 @@ del "..\Dist\log\**.idb" "..\Dist\log\Debug\**.pdb" "..\Dist\log\Debug\**.pch"</
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>FZLIB_EXPORTS;FZ_PLATFORM_WINDOWS;FZ_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;EntryPoint;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;EntryPoint;Vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -106,6 +118,8 @@ del "..\Dist\log\**.idb" "..\Dist\log\Debug\**.pdb" "..\Dist\log\Debug\**.pch"</
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>Vendor\spdlog\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>..\Dist\log\FZLib.lib</ImportLibrary>
     </Link>
     <PreBuildEvent>
@@ -113,26 +127,141 @@ del "..\Dist\log\**.idb" "..\Dist\log\Debug\**.pdb" "..\Dist\log\Debug\**.pch"</
 IF NOT EXIST "..\Dist\include\" (mkdir "..\Dist\include\")
 IF NOT EXIST "..\Dist\include\FZLib" (mkdir "..\Dist\include\FZLib")
 IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
-copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"</Command>
+IF NOT EXIST "..\Dist\include\spdlog" (mkdir "..\Dist\include\spdlog")
+IF NOT EXIST "..\Dist\include\spdlog\cfg" (mkdir "..\Dist\include\spdlog\cfg")
+IF NOT EXIST "..\Dist\include\spdlog\details" (mkdir "..\Dist\include\spdlog\details")
+IF NOT EXIST "..\Dist\include\spdlog\fmt" (mkdir "..\Dist\include\spdlog\fmt")
+IF NOT EXIST "..\Dist\include\spdlog\fmt\bundled" (mkdir "..\Dist\include\spdlog\fmt\bundled")
+IF NOT EXIST "..\Dist\include\spdlog\sinks" (mkdir "..\Dist\include\spdlog\sinks")
+copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h" "..\Dist\include\spdlog\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h" "..\Dist\include\spdlog\cfg\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h" "..\Dist\include\spdlog\details\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\**.h" "..\Dist\include\spdlog\fmt\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\**.h" "..\Dist\include\spdlog\fmt\bundled\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\sinks\**.h" "..\Dist\include\spdlog\sinks\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Release\x86_64\"
 copy /B /Y "..\Dist\log\**.dll" "..\Dist\lib\Release\x86_64\"
-del "..\Dist\log\**.dll" "..\Dist\log\**.lib"
-del "..\Dist\log\Release\**.obj" "..\Dist\log\**.ilk" "..\Dist\log\**.exp"
-del "..\Dist\log\**.idb" "..\Dist\log\Release\**.pdb" "..\Dist\log\Release\**.pch"</Command>
+rmdir /S /Q "..\Dist\log\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EntryPoint\framework.h" />
     <ClInclude Include="EntryPoint\pch.h" />
+    <ClInclude Include="Helpers\LogHelper.h" />
     <ClInclude Include="Helpers\StringHelper.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\async.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\argv.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\env.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\helpers-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\cfg\helpers.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\common-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\common.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\backtracer.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\circular_q.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\console_globals.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\file_helper.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\null_mutex.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\os-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\os.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\registry.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\tcp_client.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\thread_pool.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\udp_client-windows.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\udp_client.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\details\windows_include.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\args.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\locale.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\os.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\std.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\bundled\xchar.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\chrono.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\compile.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\fmt.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\ostr.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\ranges.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\std.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fmt\xchar.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\formatter.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\fwd.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\logger-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\logger.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\pattern_formatter.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\callback_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\hourly_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\kafka_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\mongo_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\qt_sinks.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\udp_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\spdlog.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\stopwatch.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\tweakme.h" />
+    <ClInclude Include="Vendor\spdlog\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint\dllmain.cpp" />
     <ClCompile Include="EntryPoint\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Helpers\LogHelper.cpp" />
     <ClCompile Include="Helpers\StringHelper.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,6 +9,10 @@ workspace "FZLib"
 	}
 	
 	helperDir = "FZLib/Helpers/"
+	spdlogDir = "FZLib/Vendor/spdlog/"
+
+	IncludeDir = {}
+	IncludeDir["SPDLOG"] = "%{prj.name}/Vendor/spdlog/"
 
 	project "FZLib"
 		location "FZLib"
@@ -30,7 +34,19 @@ workspace "FZLib"
 		"{MKDIR} %[Dist/include/]",
 		"{MKDIR} %[Dist/include/FZLib]",
 		"{MKDIR} %[Dist/include/FZLib/Helpers]",
+		"{MKDIR} %[Dist/include/spdlog]",
+		"{MKDIR} %[Dist/include/spdlog/cfg]",
+		"{MKDIR} %[Dist/include/spdlog/details]",
+		"{MKDIR} %[Dist/include/spdlog/fmt]",
+		"{MKDIR} %[Dist/include/spdlog/fmt/bundled]",
+		"{MKDIR} %[Dist/include/spdlog/sinks]",
 		"{COPYFILE} %["..helperDir.."/**.h] %[Dist/include/FZLib/Helpers/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/**.h] %[Dist/include/spdlog/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/cfg/**.h] %[Dist/include/spdlog/cfg/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/details/**.h] %[Dist/include/spdlog/details/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/fmt/**.h] %[Dist/include/spdlog/fmt/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/fmt/bundled/**.h] %[Dist/include/spdlog/fmt/bundled/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/sinks/**.h] %[Dist/include/spdlog/sinks/]",
 	}
 
 	defines
@@ -48,15 +64,24 @@ workspace "FZLib"
     {
         "%{prj.name}",
         "%{prj.name}/EntryPoint",
+		"%{IncludeDir.SPDLOG}/include",
     }
+
+	libdirs 
+	{ 
+		"%{IncludeDir.SPDLOG}/lib/%{cfg.buildcfg}",
+	}
+
+	links
+	{
+		"spdlog.lib"
+	}
 
 	postbuildcommands 
 	{ 
 		"{COPYFILE} %[Dist/log/**.lib] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
 		"{COPYFILE} %[Dist/log/**.dll] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
-		"{DELETE} %[Dist/log/**.dll] %[Dist/log/**.lib]",
-		"{DELETE} %[Dist/log/%{cfg.buildcfg}/**.obj] %[Dist/log/**.ilk] %[Dist/log/**.exp]",
-		"{DELETE} %[Dist/log/**.idb] %[Dist/log/%{cfg.buildcfg}/**.pdb] %[Dist/log/%{cfg.buildcfg}/**.pch]",
+		"{RMDIR} %[Dist/log/]",
 	}
 
     filter "system:Windows"

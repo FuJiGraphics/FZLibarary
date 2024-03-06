@@ -8,15 +8,23 @@
 	#define FZLIB_API __declspec(dllimport)
 #endif
 
-namespace FZLib {
-	namespace StringHelper {
-		/**
-			* @brief	std::string을 LPCWSTR로 변환
-			* @param[in]	str	: 변환시킬 파라미터
-			* @return	std::wstring	: 변환된 LPCWSTR 타입의 wstring
-			*/
-		LPCWSTR FZLIB_API StringToLPCWSTR(const std::string& str);
+// Standard include headers
+#include <string>
 
-	}	// namespace StringHelper
-}	// namespace FZLib
+extern "C" {
+	namespace FZLib {
+
+		class FZLIB_API StringHelper
+		{
+		public:
+			/**
+			 * @brief	std::string을 LPCWSTR로 변환
+			 * @param[in]	str	: 변환시킬 파라미터
+			 * @return	std::wstring	: 변환된 LPCWSTR 타입의 wstring
+			 */
+			static std::wstring StringToWString(const std::string& str);
+		};
+
+	} // namespace FZLib
+}
 #endif
