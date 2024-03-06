@@ -4,7 +4,7 @@
 namespace FZLib {
 	namespace StringHelper {
 
-		std::wstring StringHelper::StringToLPCWSTR(const std::string& str)
+		LPCWSTR StringHelper::StringToLPCWSTR(const std::string& str)
 		{
 			int size;
 			int slength = (int)str.length() + 1;
@@ -14,7 +14,7 @@ namespace FZLib {
 			std::wstring wStr(buf);
 			delete[] buf;
 			buf = nullptr;
-			return wStr;
+			return wStr.c_str();
 		}
 
 	}	// namespace StringHelper
