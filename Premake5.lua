@@ -55,8 +55,8 @@ workspace "FZLib"
 		"{COPYFILE} %[Dist/log/**.lib] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
 		"{COPYFILE} %[Dist/log/**.dll] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
 		"{DELETE} %[Dist/log/**.dll] %[Dist/log/**.lib]",
-		"{DELETE} %[Dist/log/**.obj] %[Dist/log/**.ilk] %[Dist/log/**.exp]",
-		"{DELETE} %[Dist/log/**.idb] %[Dist/log/**.pdb] %[Dist/log/**.pch]",
+		"{DELETE} %[Dist/log/%{cfg.buildcfg}/**.obj] %[Dist/log/**.ilk] %[Dist/log/**.exp]",
+		"{DELETE} %[Dist/log/**.idb] %[Dist/log/%{cfg.buildcfg}/**.pdb] %[Dist/log/%{cfg.buildcfg}/**.pch]",
 	}
 
     filter "system:Windows"

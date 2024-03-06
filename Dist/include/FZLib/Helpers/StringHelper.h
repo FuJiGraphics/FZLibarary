@@ -15,7 +15,7 @@ namespace FZLib {
 			* @param[in]	str	: 변환시킬 파라미터
 			* @return	std::wstring	: 변환된 LPCWSTR 타입의 wstring
 			*/
-		extern "C" LPCWSTR FZLIB_API StringToLPCWSTR(const std::string& str);
+		LPCWSTR FZLIB_API StringToLPCWSTR(const std::string& str);
 
 	}	// namespace StringHelper
 }	// namespace FZLib

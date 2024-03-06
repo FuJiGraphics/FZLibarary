@@ -83,8 +83,8 @@ copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"</Command>
       <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Debug\x86_64\"
 copy /B /Y "..\Dist\log\**.dll" "..\Dist\lib\Debug\x86_64\"
 del "..\Dist\log\**.dll" "..\Dist\log\**.lib"
-del "..\Dist\log\**.obj" "..\Dist\log\**.ilk" "..\Dist\log\**.exp"
-del "..\Dist\log\**.idb" "..\Dist\log\**.pdb" "..\Dist\log\**.pch"</Command>
+del "..\Dist\log\Debug\**.obj" "..\Dist\log\**.ilk" "..\Dist\log\**.exp"
+del "..\Dist\log\**.idb" "..\Dist\log\Debug\**.pdb" "..\Dist\log\Debug\**.pch"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,8 +119,8 @@ copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"</Command>
       <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Release\x86_64\"
 copy /B /Y "..\Dist\log\**.dll" "..\Dist\lib\Release\x86_64\"
 del "..\Dist\log\**.dll" "..\Dist\log\**.lib"
-del "..\Dist\log\**.obj" "..\Dist\log\**.ilk" "..\Dist\log\**.exp"
-del "..\Dist\log\**.idb" "..\Dist\log\**.pdb" "..\Dist\log\**.pch"</Command>
+del "..\Dist\log\Release\**.obj" "..\Dist\log\**.ilk" "..\Dist\log\**.exp"
+del "..\Dist\log\**.idb" "..\Dist\log\Release\**.pdb" "..\Dist\log\Release\**.pch"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
