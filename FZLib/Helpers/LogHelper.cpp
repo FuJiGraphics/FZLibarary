@@ -21,11 +21,13 @@ namespace FZLib {
 
 	void LogSystem::ClearPattern()
 	{
-		SetPattern(Pattern::Simple);
+		LogSystem::Initialize();
+		LogSystem::SetPattern(Pattern::Simple);
 	}
 
 	void LogSystem::SetPattern(Pattern p)
 	{
+		LogSystem::Initialize();
 		switch (p)
 		{
 			case Pattern::Simple:
@@ -42,6 +44,7 @@ namespace FZLib {
 
 	void LogSystem::SetPattern(const std::string& format)
 	{
+		LogSystem::Initialize();
 		LogSystem::SetPattern(format);
 	}
 

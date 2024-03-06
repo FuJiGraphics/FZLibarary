@@ -121,7 +121,7 @@ d:\dev\fzlib\fzlib\helpers\loghelper.h(37): warning C4251: 'FZLib::LogSystem::s_
   d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\registry.h(37): note: 'std::shared_ptr<spdlog::logger>' 선언을 참조하십시오.
   StringHelper.cpp
   코드를 생성하고 있습니다...
-d:\dev\fzlib\fzlib\helpers\loghelper.cpp(46): warning C4717: 'FZLib::LogSystem::SetPattern': 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
+d:\dev\fzlib\fzlib\helpers\loghelper.cpp(49): warning C4717: 'FZLib::LogSystem::SetPattern': 모든 제어 경로에서 재귀적입니다. 함수로 인해 런타임 스택 오버플로가 발생합니다.
      ..\Dist\log\FZLib.lib 라이브러리 및 ..\Dist\log\FZLib.exp 개체를 생성하고 있습니다.
   FZLib.vcxproj -> D:\Dev\FZLib\FZLib\..\Dist\log\FZLib.dll
   ..\Dist\log\FZLib.lib

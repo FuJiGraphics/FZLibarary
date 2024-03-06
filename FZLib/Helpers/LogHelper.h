@@ -39,12 +39,12 @@ namespace FZLib {
 
 
 #pragma region Defines 
-#define FZLOG_TRACE(...)		FZLib::LogSystem::GetLogger()->trace( __VA_ARGS__ );
-#define FZLOG_DEBUG(...)		FZLib::LogSystem::GetLogger()->debug( __VA_ARGS__ );
-#define FZLOG_INFO(...)			FZLib::LogSystem::GetLogger()->info( __VA_ARGS__ );
-#define FZLOG_WARN(...)			FZLib::LogSystem::GetLogger()->warn( __VA_ARGS__ );
-#define FZLOG_ERROR(...)		FZLib::LogSystem::GetLogger()->error( __VA_ARGS__ );
-#define FZLOG_CRITICAL(...)		FZLib::LogSystem::GetLogger()->critical( __VA_ARGS__ );
+#define FZLOG_TRACE(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::trace, __VA_ARGS__);
+#define FZLOG_DEBUG(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::debug, __VA_ARGS__);
+#define FZLOG_INFO(...)			SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::info, __VA_ARGS__);
+#define FZLOG_WARN(...)			SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::warn, __VA_ARGS__);
+#define FZLOG_ERROR(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::err, __VA_ARGS__);
+#define FZLOG_CRITICAL(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::critical, __VA_ARGS__);
 #pragma endregion 
 
 }
