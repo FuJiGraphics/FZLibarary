@@ -36,7 +36,7 @@ namespace FZLib {
 				break;
 			case Pattern::Details:
 				spdlog::set_pattern("[%H:%M:%S %z] [%n] [%^---%L---%$] [thread %t] %v");
-				break;
+				break; 
 		}
 	}
 
