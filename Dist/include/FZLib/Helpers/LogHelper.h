@@ -12,15 +12,22 @@
 
 #include <memory>
 #include <utility>
+#include <string>
 
 namespace FZLib {
 
 	class FZLIB_API LogSystem
 	{
 	public:
-		enum class Pattern
-		{
-			Simple, LineScanner, Details,
+		enum class Pattern {
+			Blank, Simple, LineScan, FunctionScan
+		};
+
+		struct Format {
+			static const std::string&&
+				SPACE,	TEXT,	COLOR,	ASSIGN,
+				NAME,	LINE,	FILE,	FUNC,
+				YEAR,	MONTH,	DAY,	TIME;
 		};
 
 	public:
@@ -29,12 +36,15 @@ namespace FZLib {
 
 		static void SetPattern(Pattern p);
 		static void SetPattern(const std::string& format);
+		static void AddPattern(const std::string& format);
+		static void DelPattern(const std::string& format);
 
 	public:
 		static std::shared_ptr<spdlog::logger> GetLogger();
 
 	private:
-		static std::shared_ptr<spdlog::logger> s_pLogger;
+		static std::string						s_strLogFormat;
+		static std::shared_ptr<spdlog::logger>	s_pLogger;
 	};
 
 
