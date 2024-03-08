@@ -148,10 +148,17 @@ rmdir /S /Q "..\Dist\log\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_Buffer.h" />
     <ClInclude Include="EntryPoint\framework.h" />
     <ClInclude Include="EntryPoint\pch.h" />
+    <ClInclude Include="Graphics\Core\Buffer.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_CoreRef.h" />
+    <ClInclude Include="Graphics\gcr.h" />
     <ClInclude Include="Helpers\LogHelper.h" />
     <ClInclude Include="Helpers\StringHelper.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_DeviceManager.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_Renderer2D.h" />
+    <ClInclude Include="Graphics\Core\Renderer2D.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger-inl.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger.h" />
@@ -257,12 +264,17 @@ rmdir /S /Q "..\Dist\log\"</Command>
     <ClInclude Include="Vendor\spdlog\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Core\DirectX11\Dx11_Buffer.cpp" />
     <ClCompile Include="EntryPoint\dllmain.cpp" />
     <ClCompile Include="EntryPoint\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Graphics\Core\Buffer.cpp" />
     <ClCompile Include="Helpers\LogHelper.cpp" />
     <ClCompile Include="Helpers\StringHelper.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Dx11_DeviceManager.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Dx11_Renderer2D.cpp" />
+    <ClCompile Include="Graphics\Core\Renderer2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,8 +6,8 @@
 
 namespace FZLib {
 
-	std::shared_ptr<spdlog::logger> LogSystem::s_pLogger = nullptr;
-	std::string	LogSystem::s_strLogFormat = LogSystem::Format::TEXT;
+	std::shared_ptr<spdlog::logger>	LogSystem::s_pLogger = nullptr;
+	std::string						LogSystem::s_strLogFormat = LogSystem::Format::TEXT;
 
 	const std::string&&
 		LogSystem::Format::SPACE	= " ",
@@ -86,5 +86,4 @@ namespace FZLib {
 		LogSystem::Initialize();
 		return s_pLogger;
 	}
-
 }

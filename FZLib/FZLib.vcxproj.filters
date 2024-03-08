@@ -357,6 +357,13 @@
     <ClInclude Include="Vendor\spdlog\include\spdlog\version.h">
       <Filter>Vendor\spdlog\include\spdlog</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Core\Renderer2D.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_DeviceManager.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_Renderer2D.h" />
+    <ClInclude Include="Graphics\Core\Buffer.h" />
+    <ClInclude Include="Graphics\gcr.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_CoreRef.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Dx11_Buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint\dllmain.cpp">
@@ -371,5 +378,10 @@
     <ClCompile Include="Helpers\StringHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Core\Renderer2D.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Dx11_DeviceManager.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Dx11_Renderer2D.cpp" />
+    <ClCompile Include="Graphics\Core\Buffer.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Dx11_Buffer.cpp" />
   </ItemGroup>
 </Project>
