@@ -24,4 +24,14 @@ namespace FZLib {
 		return new Dx11_VertexBuffer(size);
 	}
 
+	IndexBuffer * IndexBuffer::Create(unsigned int * indices, unsigned int count)
+	{
+		return nullptr;
+	}
+
+	IndexBuffer * IndexBuffer::Create(unsigned int size)
+	{
+		return nullptr;
+	}
+
 } // namespace FZLib

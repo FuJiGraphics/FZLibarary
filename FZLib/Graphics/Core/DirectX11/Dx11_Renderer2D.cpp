@@ -24,14 +24,16 @@ namespace FZLib {
 		m_Height = height;
 
 		// Init Device Resources
-		result = m_DeviceManager->StartUp(m_Hwnd, m_Width, m_Height);
+		auto& deviceManager = DeviceManager::GetInstance();
+		result = deviceManager.StartUp(m_Hwnd, m_Width, m_Height);
 		return result;
 	}
 
 	bool Dx11_Renderer2D::Shutdown()
 	{
 		bool result = false;
-		result = m_DeviceManager->Shutdown();
+		auto& deviceManager = DeviceManager::GetInstance();
+		result = deviceManager.Shutdown();
 		return result;
 	}
 

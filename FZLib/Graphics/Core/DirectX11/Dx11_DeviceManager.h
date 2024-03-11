@@ -16,31 +16,41 @@ namespace FZLib {
 
 	class FZLIB_API DeviceManager 
 	{
-	public: // Constructor and Destructor
+	public:
+		static DeviceManager& GetInstance();
+
+	private:
 		DeviceManager();
+		DeviceManager(const DeviceManager&) = delete;
+	public: // Constructor and Destructor
 		~DeviceManager();
 
 	public:	// Device Initialize Interface
-		bool			StartUp(const HWND& hwnd, int width, int height);
-		bool			Shutdown();
+		bool					StartUp(const HWND& hwnd, int width, int height);
+		bool					Shutdown();
 
 	public:	// Setting device state and Getting MetaData interface
-		float			GetAspectRatio() const;
-		unsigned int	GetWidth() const;
-		unsigned int	GetHeight() const;
-		bool			SetFullScreen();
-		bool			SetWindowed();
+		ID3D11Device&			GetDevice()	const;
+		ID3D11DeviceContext&	GetDeviceContext() const;
+		float					GetAspectRatio() const;
+		unsigned int			GetWidth() const;
+		unsigned int			GetHeight() const;
+		bool					SetFullScreen();
+		bool					SetWindowed();
 
 	public: // Generate Resource Interface
-		bool			CreateDeviceAndSwapChain(int bufWidth, int bufHeight);
-		bool			CreateBackBufferAndViewport();
-		bool			ResetBackBuffer();
-		bool			EnumerateAdapters(std::vector<IDXGIAdapter*>* out);
-		bool			ReleaseBackBuffer();
+		bool					CreateDeviceAndSwapChain(int bufWidth, int bufHeight);
+		bool					CreateBackBufferAndViewport();
+		bool					ResetBackBuffer();
+		bool					EnumerateAdapters(std::vector<IDXGIAdapter*>* out);
+		bool					ReleaseBackBuffer();
+
+	private: // static class singleton instance
+		static std::shared_ptr<DeviceManager>	s_Instance;
 
 	private: // Member Variables
-		HWND			m_WindowHandle;
-		bool			m_Initialized;
+		HWND					m_WindowHandle;
+		bool					m_Initialized;
 
 		//-----------------------------------------------------------------------------
 		// Direct3D device

@@ -10,6 +10,14 @@
 #include "Dx11_DeviceManager.h"
 
 namespace FZLib {
+	std::shared_ptr<DeviceManager> DeviceManager::s_Instance = nullptr;
+
+	DeviceManager& DeviceManager::GetInstance()
+	{
+		if (s_Instance == nullptr)
+			s_Instance = std::make_shared<DeviceManager>();
+		return *s_Instance;
+	}
 
 	DeviceManager::DeviceManager()
 		: m_WindowHandle(NULL)
@@ -58,6 +66,16 @@ namespace FZLib {
 		m_Device.Reset();
 		result = ReleaseBackBuffer();
 		return result;
+	}
+
+	ID3D11Device & DeviceManager::GetDevice() const
+	{
+		return *m_Device.Get();
+	}
+
+	ID3D11DeviceContext& DeviceManager::GetDeviceContext() const
+	{
+		return *m_DeviceContext.Get();
 	}
 
 	float DeviceManager::GetAspectRatio() const
