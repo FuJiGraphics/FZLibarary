@@ -10,7 +10,7 @@
 #include "Buffer.h"
 
 // TODO : Include
-#include <Graphics/Core/DirectX11/Dx11_Buffer.h>
+#include <Graphics/Core/DirectX11/Buffer.h>
 
 namespace FZLib {
 
@@ -21,7 +21,7 @@ namespace FZLib {
 
 	VertexBuffer* VertexBuffer::Create(unsigned int size)
 	{
-		return new Dx11_VertexBuffer(size);
+		return new DirectX11::VertexBuffer(size);
 	}
 
 	IndexBuffer * IndexBuffer::Create(unsigned int * indices, unsigned int count)

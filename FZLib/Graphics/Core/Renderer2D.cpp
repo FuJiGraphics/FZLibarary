@@ -10,11 +10,11 @@
 #include "Renderer2D.h"
 
 // TODO : Include
-#include <Graphics/Core/DirectX11/Dx11_Renderer2D.h>
+#include <Graphics/Core/DirectX11/Renderer2D.h>
 
 namespace FZLib
 {
-	Renderer2D* Renderer2D::Create()
+	Renderer2D* Renderer2D::Create(const std::string& name)
 	{
 		return nullptr;
 	}

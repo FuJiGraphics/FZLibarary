@@ -11,6 +11,7 @@
 #define __FZ_LIBRARY_GRAPHICS_COMMON_RESOURCES_H_
 
  // standard library headers
+#include <iostream>
 #include <string>
 #include <vector>
 #include <map>

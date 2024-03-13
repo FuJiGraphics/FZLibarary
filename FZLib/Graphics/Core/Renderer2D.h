@@ -17,11 +17,12 @@ namespace FZLib {
 	class FZLIB_API Renderer2D
 	{
 	public: // Create 2D Renderer Instance
-		static Renderer2D* Create();
+		static Renderer2D* Create(const std::string& name);
 
 	public: // Setup Devices in 2D Renderer
 		virtual bool StartUp(const HWND& hwnd, int width, int height) = 0;
 		virtual bool Shutdown() = 0;
+		virtual void Bind() = 0;
 
 	public: // Getting metadata and Setting Metadata
 		virtual std::string GetDeviceInfo() = 0;

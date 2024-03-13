@@ -358,12 +358,13 @@
       <Filter>Vendor\spdlog\include\spdlog</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Core\Renderer2D.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Dx11_DeviceManager.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Dx11_Renderer2D.h" />
     <ClInclude Include="Graphics\Core\Buffer.h" />
     <ClInclude Include="Graphics\gcr.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Dx11_CoreRef.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Dx11_Buffer.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\CoreRef.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceManager.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint\dllmain.cpp">
@@ -379,9 +380,10 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Core\Renderer2D.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Dx11_DeviceManager.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Dx11_Renderer2D.cpp" />
     <ClCompile Include="Graphics\Core\Buffer.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Dx11_Buffer.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Buffer.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceManager.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp" />
   </ItemGroup>
 </Project>
