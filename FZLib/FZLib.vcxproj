@@ -157,7 +157,7 @@ rmdir /S /Q "..\Dist\log\"</Command>
     <ClInclude Include="Graphics\gcr.h" />
     <ClInclude Include="Helpers\LogHelper.h" />
     <ClInclude Include="Helpers\StringHelper.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceManager.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceResource.h" />
     <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h" />
     <ClInclude Include="Graphics\Core\Renderer2D.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async.h" />
@@ -274,7 +274,7 @@ rmdir /S /Q "..\Dist\log\"</Command>
     <ClCompile Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.cpp" />
     <ClCompile Include="Helpers\LogHelper.cpp" />
     <ClCompile Include="Helpers\StringHelper.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceManager.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceResource.cpp" />
     <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp" />
     <ClCompile Include="Graphics\Core\Renderer2D.cpp" />
   </ItemGroup>

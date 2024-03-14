@@ -11,7 +11,6 @@
 #define __FZ_LIBRARY_RENDERER2D_DIRECTX11__
 
 #include "CoreRef.h"
-#include "Helper/DeviceManager.h"
 #include <Graphics/Core/Renderer2D.h>
 
 namespace FZLib {
@@ -25,24 +24,24 @@ namespace FZLib {
 			virtual ~Renderer2D();
 
 		public: // Setup Devices in 2D Renderer
-			virtual bool StartUp(const HWND& hwnd, int width, int height) final;
-			virtual bool Shutdown() final;
+			virtual bool			StartUp(const HWND& hwnd, int width, int height) final;
+			virtual bool			Shutdown() final;
 
 		public: // Getter Setter Interface
-			virtual std::string GetDeviceInfo() final;
+			virtual std::string		GetDeviceInfo() final;
 
 		public: // Generic Interface
-			virtual void RenderFrame() final;
+			virtual void			RenderFrame() final;
 
 		public:
-			inline ID3D11Device*			GetDevice();
-			inline ID3D11DeviceContext*		GetDeviceContext();
+			inline std::string&		GetRendererID() { return m_RendererID; }
 
 		private:
 			static int				s_RendererCount;
+			inline void				SetRendererID(const std::string& name, int index) { m_RendererID = name + std::to_string(index); }
 
 		private:
-			std::string				m_Name,	m_RenderID;
+			std::string				m_RendererID;
 			HWND					m_Hwnd;
 			int						m_Width, m_Height;
 			bool					m_Initialized;

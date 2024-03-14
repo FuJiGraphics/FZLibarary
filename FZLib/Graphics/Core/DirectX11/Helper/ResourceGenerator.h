@@ -12,6 +12,7 @@
 
 #include <Graphics/Core/DirectX11/CoreRef.h>
 #include <Graphics/gcr.h>
+#include "DeviceResource.h"
 
 namespace FZLib {
 	namespace DirectX11 {
@@ -27,18 +28,16 @@ namespace FZLib {
 			public:
 				/**
 				 * @brief		ResourceGenerator의 인스턴스를 생성
-				 * @param[in]	device	: 리소스 생성에 사용될 디바이스
-				 * @param[in]	deviceContext	: 리소스 생성에 사용될 디바이스 컨텍스트
 				 * @return		ResourceGenerator&	: ResourceGenerator의 객체 레퍼런스
 				 */
-				static ResourceGenerator&	GetInstance(ID3D11Device& device, ID3D11DeviceContext& deviceContext);
+				static ResourceGenerator&	GetInstance();
 				//-----------------------------------------------------------------------------
 
 
 				//-----------------------------------------------------------------------------
 				// Constructor and destructor
 			public:
-				ResourceGenerator();
+				ResourceGenerator() = default;
 				~ResourceGenerator() = default;
 				//-----------------------------------------------------------------------------
 
@@ -46,6 +45,49 @@ namespace FZLib {
 				//-----------------------------------------------------------------------------
 				// Export Interfaces
 			public:
+				/**
+				 * @brief		DeviceResource의 객체를 반환
+				 * @param[in]	deviceName	: 반환하고자 하는 DeviceResource의 이름
+				 * @return		DeviceResource*	: Device Resource의 객체 주소 (실패 시 nullptr)
+				 */
+				DeviceResource*				GetDeviceResource(const std::string& deviceName);
+				/**
+				 * @brief	현재 Generator에 설정된 Device를 반환
+				 * @return	ID3D11Device*	: 현재 설정된 디바이스의 객체 주소 (실패 시 nullptr) 
+				 */
+				ID3D11Device*				GetCurrentDevice() const;
+				/**
+				 * @brief	현재 Generator에 설정된 Device Context를 반환
+				 * @return	ID3D11Device*	: 현재 설정된 디바이스 컨텍스트의 객체 주소 (실패 시 nullptr)
+				 */
+				ID3D11DeviceContext*		GetCurrentDeviceContext() const;
+				/**
+				 * @brief	특정 이름의 디바이스 리소스를 릴리즈한다.
+				 * @param[in]	deviceName	: 릴리즈할 디바이스 리소스 명
+				 * @return	bool	: 결과(true/false)
+				 */
+				bool				ReleaseDeviceResource(const std::string& deviceName);
+				/**
+				 * @brief	현재 디바이스들을 모두 릴리즈한다.
+				 */
+				bool				ReleaseDeviceResources();                             
+				/**
+				 * @brief
+				 * @details
+				 * @param[in]	deviceName	:
+				 * @param[in]	hwnd	:
+				 * @param[in]	width	:
+				 * @param[in]	height	:
+				 * @return	bool	:
+				 */
+				bool				GenerateDeviceResources(const std::string& deviceName, const HWND& hwnd, int width, int height); 
+				/**
+				 * @brief
+				 * @details
+				 * @param[in]	deviceName	:
+				 * @return	bool	:
+				 */
+				bool				ApplyDeviceResources(const std::string& deviceName);
 				/**
 				 * @brief	정점 버퍼를 생성
 				 * @param[in]	size	: 생성될 버퍼의 바이트 크기
@@ -79,6 +121,9 @@ namespace FZLib {
 				 * @return	ID3D11Buffer	: 생성된 상수 버퍼 (실패 시, nullptr를 반환)
 				 */
 				ID3D11Buffer*		CreateStructuredBuffer(unsigned int count, unsigned int structSize, bool CPUwritable, bool GPUwritable, D3D11_SUBRESOURCE_DATA* pData = nullptr);
+
+				ID3D11ShaderResourceView*	CreateBufferShaderResourceView(ID3D11Resource* pResource);
+				ID3D11UnorderedAccessView*	CreateBufferUnorderedAccessView(ID3D11Resource* pResource);
 				//-----------------------------------------------------------------------------
 
 
@@ -89,18 +134,20 @@ namespace FZLib {
 				 * @brief		현재 ResourceGenerator에 디바이스와 디바이스 컨텍스트에 대한 상태 객체를 저장
 				 * @details		리소스 생성에 필요한 디바이스와 디바이스 컨텍스트를 매 인스턴스 호출 시마다 쿼리합니다.
 				 *
-				 * @param[in]	device	: 리소스 생성에 사용될 디바이스
-				 * @param[in]	deviceContext	: 리소스 생성에 사용될 디바이스 컨텍스트
+				 * @param[in]	deviceResource	: 리소스 생성에 사용될 디바이스 리소스
 				 */
-				void				SetDeviceAndDeviceContext(ID3D11Device& device, ID3D11DeviceContext& deviceContext);
+				void				SetDeviceResource(DeviceResource& deviceResource);
 				//-----------------------------------------------------------------------------
 
 				//-----------------------------------------------------------------------------
 				// Member variables
 			private:
 				static std::unique_ptr<ResourceGenerator>		s_pInstance;
-				ID3D11Device*									m_pDevice;
-				ID3D11DeviceContext*							m_pDeviceContext;
+				static std::map<std::string, DeviceResource>	s_mDeviceResources;
+				static DeviceResource*							s_CurrDeviceResource;
+				static ID3D11Device*							s_CurrDevice;
+				static ID3D11DeviceContext*						s_CurrDeviceContext;
+
 				//-----------------------------------------------------------------------------
 			}; // class ResourceGenerator
 

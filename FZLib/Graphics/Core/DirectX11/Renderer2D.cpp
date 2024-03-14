@@ -8,6 +8,7 @@
 
 #include <pch.h>
 #include "Renderer2D.h"
+#include "Helper/ResourceGenerator.h"
 
 namespace FZLib {
 	namespace DirectX11 {
@@ -15,20 +16,18 @@ namespace FZLib {
 		int Renderer2D::s_RendererCount = 0;
 
 		Renderer2D::Renderer2D(const std::string& name)
-			: m_Name(name)
-			, m_Hwnd(nullptr)
+			: m_Hwnd(nullptr)
 			, m_Width(0) ,m_Height(0)
 			, m_Initialized(false)
 		{
 			++s_RendererCount;
-			m_RenderID = std::to_string(s_RendererCount);
+			this->SetRendererID(name, s_RendererCount);
 		}
 
 		Renderer2D::Renderer2D(const std::string& name, const HWND& hwnd, int width, int height)
-			: m_Name(name)
 		{
 			++s_RendererCount;
-			m_RenderID = std::to_string(s_RendererCount);
+			this->SetRendererID(name, s_RendererCount);
 			StartUp(hwnd, width, height);
 		}
 
@@ -48,8 +47,8 @@ namespace FZLib {
 			m_Width = width;
 			m_Height = height;
 
-			auto& dm = Helper::DeviceManager::GetInstance();
-			return dm.GenerateDeviceResource(m_Name + m_RenderID, hwnd, width, height);
+			auto& resGen = Helper::ResourceGenerator::GetInstance();
+			return (resGen.GenerateDeviceResources(m_RendererID, hwnd, width, height));
 		}
 
 		bool Renderer2D::Shutdown()
@@ -57,9 +56,8 @@ namespace FZLib {
 			if (m_Initialized == false)
 				return (false);
 			m_Initialized = false;
-			auto& dm = Helper::DeviceManager::GetInstance();
-			dm.Release();
-			return (true);
+			auto& resGen = Helper::ResourceGenerator::GetInstance();
+			return (resGen.ReleaseDeviceResources());
 		}
 
 		std::string Renderer2D::GetDeviceInfo()
@@ -70,22 +68,6 @@ namespace FZLib {
 		void Renderer2D::RenderFrame()
 		{
 
-		}
-
-		inline ID3D11Device* Renderer2D::GetDevice()
-		{
-			if (m_Initialized == false)
-				return false;
-			auto* deviceRes = Helper::DeviceManager::GetInstance().GetDeviceResource(m_Name + m_RenderID);
-			return (deviceRes != nullptr) ? &deviceRes->GetDevice() : nullptr;
-		}
-
-		inline ID3D11DeviceContext* Renderer2D::GetDeviceContext()
-		{
-			if (m_Initialized == false)
-				return false;
-			auto* deviceRes = Helper::DeviceManager::GetInstance().GetDeviceResource(m_Name + m_RenderID);
-			return (deviceRes != nullptr) ? &deviceRes->GetDeviceContext() : nullptr;
 		}
 
 	} // namespace DirectX11

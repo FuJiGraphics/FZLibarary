@@ -5,22 +5,74 @@ namespace FZLib {
 	namespace DirectX11 {
 		namespace Helper {
 			std::unique_ptr<ResourceGenerator>		ResourceGenerator::s_pInstance = nullptr;
+			std::map<std::string, DeviceResource>	ResourceGenerator::s_mDeviceResources;
+			DeviceResource*							ResourceGenerator::s_CurrDeviceResource = nullptr;
+			ID3D11Device*							ResourceGenerator::s_CurrDevice = nullptr;
+			ID3D11DeviceContext*					ResourceGenerator::s_CurrDeviceContext = nullptr;
 
-			ResourceGenerator& ResourceGenerator::GetInstance(ID3D11Device& device, ID3D11DeviceContext& deviceContext)
+			ResourceGenerator& ResourceGenerator::GetInstance()
 			{
 				if (s_pInstance == nullptr)
 				{
 					s_pInstance = std::make_unique<ResourceGenerator>();
 				}
-				s_pInstance->SetDeviceAndDeviceContext(device, deviceContext);
-				return *s_pInstance;
+				return (*s_pInstance);
 			}
 
-			ResourceGenerator::ResourceGenerator()
-				: m_pDevice(nullptr)
-				, m_pDeviceContext(nullptr)
+			DeviceResource* ResourceGenerator::GetDeviceResource(const std::string& deviceName)
 			{
-				// Empty
+				if (s_mDeviceResources.find(deviceName) == s_mDeviceResources.end())
+					return (nullptr);
+				return &s_mDeviceResources[deviceName];
+			}
+
+			ID3D11Device* ResourceGenerator::GetCurrentDevice() const
+			{
+				return (s_CurrDevice);
+			}
+
+			ID3D11DeviceContext* ResourceGenerator::GetCurrentDeviceContext() const
+			{
+				return (s_CurrDeviceContext);
+			}
+                       
+			bool ResourceGenerator::ReleaseDeviceResource(const std::string& deviceName)
+			{
+				if (s_mDeviceResources.find(deviceName) == s_mDeviceResources.end())
+					return (false);
+				auto& deviceResource = s_mDeviceResources[deviceName];
+				bool result = deviceResource.Shutdown();
+				result = s_mDeviceResources.erase(deviceName);
+				return (result);
+			}
+
+			bool ResourceGenerator::ReleaseDeviceResources()
+			{
+				if (s_mDeviceResources.empty())
+					return (false);
+				for (auto& deviceResource : s_mDeviceResources)
+				{
+					deviceResource.second.Shutdown();
+				}
+				return (true);
+			}
+
+			bool ResourceGenerator::GenerateDeviceResources(const std::string& deviceName, const HWND& hwnd, int width, int height)
+			{
+				if (s_mDeviceResources.find(deviceName) == s_mDeviceResources.end())
+					return (false);
+				s_mDeviceResources.insert({ deviceName, {/*Default Constructor*/} });
+				s_mDeviceResources[deviceName].StartUp(hwnd, width, height);
+				this->SetDeviceResource(s_mDeviceResources[deviceName]);
+				return (true);
+			}
+
+			bool ResourceGenerator::ApplyDeviceResources(const std::string& deviceName)
+			{
+				if (s_mDeviceResources.find(deviceName) == s_mDeviceResources.end())
+					return (false);
+				this->SetDeviceResource(s_mDeviceResources[deviceName]);
+				return (true);
 			}
 
 			ID3D11Buffer* ResourceGenerator::CreateVertexBuffer(unsigned int size, bool dynamic, bool streamout, D3D11_SUBRESOURCE_DATA* pData)
@@ -56,10 +108,10 @@ namespace FZLib {
 					vData.pSysMem = nullptr;
 					vData.SysMemPitch = 0;
 					vData.SysMemSlicePitch = 0;
-					hr = m_pDevice->CreateBuffer(&desc, &vData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, &vData, &pBuffer);
 				}
 				else 
-					hr = m_pDevice->CreateBuffer(&desc, pData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, pData, &pBuffer);
 				
 				if (FAILED(hr))
 					pBuffer = nullptr;
@@ -95,10 +147,10 @@ namespace FZLib {
 					vData.pSysMem = nullptr;
 					vData.SysMemPitch = 0;
 					vData.SysMemSlicePitch = 0;
-					hr = m_pDevice->CreateBuffer(&desc, &vData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, &vData, &pBuffer);
 				}
 				else
-					hr = m_pDevice->CreateBuffer(&desc, pData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, pData, &pBuffer);
 
 				if (FAILED(hr))
 					pBuffer = nullptr;
@@ -139,10 +191,10 @@ namespace FZLib {
 					vData.pSysMem = nullptr;
 					vData.SysMemPitch = 0;
 					vData.SysMemSlicePitch = 0;
-					hr = m_pDevice->CreateBuffer(&desc, &vData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, &vData, &pBuffer);
 				}
 				else
-					hr = m_pDevice->CreateBuffer(&desc, pData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, pData, &pBuffer);
 
 				if (FAILED(hr))
 					pBuffer = nullptr;
@@ -154,7 +206,7 @@ namespace FZLib {
 																	unsigned int structSize,
 																	bool CPUwritable,
 																	bool GPUwritable,
-																	D3D11_SUBRESOURCE_DATA * pData)
+																	D3D11_SUBRESOURCE_DATA* pData)
 			{
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = count * structSize;
@@ -191,19 +243,47 @@ namespace FZLib {
 					vData.pSysMem = nullptr;
 					vData.SysMemPitch = 0;
 					vData.SysMemSlicePitch = 0;
-					hr = m_pDevice->CreateBuffer(&desc, &vData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, &vData, &pBuffer);
 				}
 				else
-					hr = m_pDevice->CreateBuffer(&desc, pData, &pBuffer);
+					hr = s_CurrDevice->CreateBuffer(&desc, pData, &pBuffer);
 				if (FAILED(hr))
 					return (nullptr);
 				return (pBuffer);
 			}
 
-			void ResourceGenerator::SetDeviceAndDeviceContext(ID3D11Device& device, ID3D11DeviceContext& deviceContext)
+			ID3D11ShaderResourceView* ResourceGenerator::CreateBufferShaderResourceView(ID3D11Resource* pResource)
 			{
-				m_pDevice = &device;
-				m_pDeviceContext = &deviceContext;
+				D3D11_SHADER_RESOURCE_VIEW_DESC desc;
+				desc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+				desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
+				desc.Buffer.ElementOffset = 0;
+				desc.Buffer.ElementWidth = 100;
+				ID3D11ShaderResourceView* pView = nullptr;
+				s_CurrDevice->CreateShaderResourceView(pResource, &desc, &pView);
+				return (pView);
+			}
+
+			ID3D11UnorderedAccessView * ResourceGenerator::CreateBufferUnorderedAccessView(ID3D11Resource* pResource)
+			{
+				D3D11_UNORDERED_ACCESS_VIEW_DESC desc;
+				desc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+				desc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
+				desc.Buffer.FirstElement = 0;
+				desc.Buffer.NumElements = 100;
+				desc.Buffer.Flags = D3D11_BUFFER_UAV_FLAG_COUNTER;
+				//desc.Buffer.Flags = D3D11_BUFFER_UAV_FLAG_APPEND;
+				//desc.Buffer.Flags = D3D11_BUFFER_UAV_FLAG_RAW;
+				ID3D11UnorderedAccessView* pView = nullptr;
+				s_CurrDevice->CreateUnorderedAccessView(pResource, &desc, &pView);
+				return (pView);
+			}
+
+			void ResourceGenerator::SetDeviceResource(DeviceResource& deviceResource)
+			{
+				s_CurrDeviceResource = &deviceResource;
+				s_CurrDevice = &deviceResource.GetDevice();
+				s_CurrDeviceContext = &deviceResource.GetDeviceContext();
 			}
 
 		} // namespace Helper
