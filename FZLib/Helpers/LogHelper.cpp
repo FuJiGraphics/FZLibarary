@@ -9,7 +9,7 @@ namespace FZLib {
 	std::shared_ptr<spdlog::logger>	LogSystem::s_pLogger = nullptr;
 	std::string						LogSystem::s_strLogFormat = LogSystem::Format::TEXT;
 
-	const std::string&&
+	/*const std::string&&
 		LogSystem::Format::SPACE	= " ",
 		LogSystem::Format::TEXT		= "%v%$",
 		LogSystem::Format::COLOR	= "%^",
@@ -21,7 +21,9 @@ namespace FZLib {
 		LogSystem::Format::YEAR		= "[%Y]",
 		LogSystem::Format::MONTH	= "[%B]",
 		LogSystem::Format::DAY		= "[%A]",
-		LogSystem::Format::TIME		= "[%T]";
+		LogSystem::Format::TIME		= "[%T]";*/
+
+	const std::string&& LogSystem::Format::DEFAULT = "%^[FILE:%s][LINE:%#][CALL:%!]{ %T }";
 
 	bool LogSystem::Initialize()
 	{
@@ -46,16 +48,12 @@ namespace FZLib {
 		switch (p)
 		{
 			case Pattern::Blank:		
-				LogSystem::s_strLogFormat = Format::COLOR + Format::TEXT;
 				break;
 			case Pattern::Simple:		
-				LogSystem::s_strLogFormat = Format::COLOR + Format::TIME + Format::NAME + Format::ASSIGN + Format::TEXT;
 				break;
 			case Pattern::LineScan:		
-				LogSystem::s_strLogFormat = Format::COLOR + Format::TIME + Format::FILE + Format::LINE + Format::ASSIGN + Format::TEXT;
 				break;
 			case Pattern::FunctionScan:	
-				LogSystem::s_strLogFormat = Format::COLOR + Format::TIME + Format::FUNC + Format::NAME + Format::ASSIGN + Format::TEXT;
 				break;
 		}
 		spdlog::set_pattern(s_strLogFormat);
@@ -81,9 +79,18 @@ namespace FZLib {
 		}
 	}
 
+	void LogSystem::SetTemporaryFormat(const std::string& format)
+	{
+		spdlog::set_pattern(format);
+	}
+
 	std::shared_ptr<spdlog::logger> LogSystem::GetLogger()
 	{
 		LogSystem::Initialize();
 		return s_pLogger;
+	}
+	std::string & LogSystem::GetLogFormat()
+	{
+		return (s_strLogFormat);
 	}
 }

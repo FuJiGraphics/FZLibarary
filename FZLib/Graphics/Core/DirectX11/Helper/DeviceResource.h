@@ -23,7 +23,7 @@ namespace FZLib {
 				~DeviceResource();
 
 			public:
-				bool	StartUp(const HWND& hwnd, int width, int height);
+				bool	StartUp(const HWND& hwnd, FZint width, int height);
 				bool	Shutdown();
 
 			public:
@@ -62,3 +62,4 @@ namespace FZLib {
 } // namespace FZLib
 
 #endif
+ 

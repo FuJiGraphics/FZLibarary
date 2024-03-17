@@ -12,7 +12,7 @@
 
 #include <Graphics/Core/DirectX11/CoreRef.h>
 #include <Graphics/gcr.h>
-#include "DeviceResource.h"
+#include "../Device.h"
 
 namespace FZLib {
 	namespace DirectX11 {
@@ -27,10 +27,11 @@ namespace FZLib {
 				// Static functions
 			public:
 				/**
-				 * @brief		ResourceGenerator의 인스턴스를 생성
+				 * @brief		ResourceGenerator의 인스턴스를 반환
+				 * @param[in]	device	: device의 객체
 				 * @return		ResourceGenerator&	: ResourceGenerator의 객체 레퍼런스
 				 */
-				static ResourceGenerator&	GetInstance();
+				static ResourceGenerator&	GetInstance(Device& device);
 				//-----------------------------------------------------------------------------
 
 
@@ -46,65 +47,63 @@ namespace FZLib {
 				// Export Interfaces
 			public:
 				/**
-				 * @brief		DeviceResource의 객체를 반환
-				 * @param[in]	deviceName	: 반환하고자 하는 DeviceResource의 이름
-				 * @return		DeviceResource*	: Device Resource의 객체 주소 (실패 시 nullptr)
-				 */
-				DeviceResource*				GetDeviceResource(const std::string& deviceName);
-				/**
-				 * @brief	현재 Generator에 설정된 Device를 반환
-				 * @return	ID3D11Device*	: 현재 설정된 디바이스의 객체 주소 (실패 시 nullptr) 
-				 */
-				ID3D11Device*				GetCurrentDevice() const;
-				/**
-				 * @brief	현재 Generator에 설정된 Device Context를 반환
-				 * @return	ID3D11Device*	: 현재 설정된 디바이스 컨텍스트의 객체 주소 (실패 시 nullptr)
-				 */
-				ID3D11DeviceContext*		GetCurrentDeviceContext() const;
-				/**
-				 * @brief	특정 이름의 디바이스 리소스를 릴리즈한다.
-				 * @param[in]	deviceName	: 릴리즈할 디바이스 리소스 명
-				 * @return	bool	: 결과(true/false)
-				 */
-				bool				ReleaseDeviceResource(const std::string& deviceName);
-				/**
-				 * @brief	현재 디바이스들을 모두 릴리즈한다.
-				 */
-				bool				ReleaseDeviceResources();                             
-				/**
-				 * @brief
-				 * @details
-				 * @param[in]	deviceName	:
-				 * @param[in]	hwnd	:
-				 * @param[in]	width	:
-				 * @param[in]	height	:
-				 * @return	bool	:
-				 */
-				bool				GenerateDeviceResources(const std::string& deviceName, const HWND& hwnd, int width, int height); 
-				/**
-				 * @brief
-				 * @details
-				 * @param[in]	deviceName	:
-				 * @return	bool	:
-				 */
-				bool				ApplyDeviceResources(const std::string& deviceName);
-				/**
-				 * @brief	정점 버퍼를 생성
-				 * @param[in]	size	: 생성될 버퍼의 바이트 크기
-				 * @param[in]	dynamic	: CPU에서 동적으로 쓸 수 있는 버퍼 타입인지 여부
-				 * @param[in]	streamout	: 렌더링된 결과에 출력 대상으로 사용할 지 여부
+				 * @brief	Vertex Buffer를 생성합니다.
+				 * @param[in]	size		: 생성될 버퍼의 바이트 크기
+				 * @param[in]	dynamic		: CPU에서 동적으로 쓸 수 있는 버퍼 타입인지 여부
 				 * @param[in]	pData		: 정점 데이터
 				 * @return	ID3D11Buffer	: 생성된 정점 버퍼 (실패 시, nullptr를 반환)
 				 */
-				ID3D11Buffer*		CreateVertexBuffer(unsigned int size, bool dynamic, bool streamout, D3D11_SUBRESOURCE_DATA* pData = nullptr);
+				ID3D11Buffer*		CreateVertexBuffer(FZuint size, FZbool dynamic, FZbool streamout, D3D11_SUBRESOURCE_DATA* pData);
 				/**
-				 * @brief	인덱스 버퍼를 생성
+				 * @brief	Static Vertex Buffer를 생성합니다.
+				 * @details	
+				 * - static 속성으로 해당 버퍼는 할당 이후 재사용이 불가합니다.
+				 * @param[in]	vertices	: 버퍼에 담을 float 정점 데이터 배열
+				 * @param[in]	size		: vertices의 총 바이트 크기
+				 * @param[in]	streamOut	: 스트림 출력 활성화 여부
+				 * @return	ID3D11Buffer	: 생성된 정점 버퍼 (실패 시, nullptr를 반환)
+				 */
+				ID3D11Buffer*		CreateStaticVertexBuffer(FZfloat* vertices, FZuint size, FZbool streamOut = false);
+				/**
+				 * @brief	Dynamic Vertex Buffer를 생성합니다.
+				 * @details	
+				 * - dynamic 속성으로 해당 버퍼는 할당 후 재사용 가능합니다.
+				 * @param[in]	size		: 생성할 버퍼의 바이트 크기
+				 * @param[in]	streamout	: 스트림 출력 활성화 여부
+				 * @return	ID3D11Buffer	: 생성된 정점 버퍼 (실패 시, nullptr를 반환)
+				 */
+				ID3D11Buffer*		CreateDynamicVertexBuffer(FZuint size, FZbool streamOut = false);
+
+
+
+				/**
+				 * @brief	Index Buffer를 생성합니다.
 				 * @param[in]	size		: 생성될 버퍼의 바이트 크기
 				 * @param[in]	dynamic		: CPU에서 동적으로 쓸 수 있는 버퍼 타입인지 여부
 				 * @param[in]	pData		: 인덱스 데이터
-				 * @return	ID3D11Buffer	: 생성된 정점 버퍼 (실패 시, nullptr를 반환)
+				 * @return	ID3D11Buffer	: 생성된 인덱스 버퍼 (실패 시, nullptr를 반환)
 				 */
-				ID3D11Buffer*		CreateIndexBuffer(unsigned int size, bool dynamic, D3D11_SUBRESOURCE_DATA* pData = nullptr);
+				ID3D11Buffer*		CreateIndexBuffer(FZuint size, FZbool dynamic, D3D11_SUBRESOURCE_DATA* pData = nullptr);
+				/**
+				 * @brief	Static Index Buffer를 생성합니다.
+				 * @details
+				 * - static 속성으로 해당 버퍼는 할당 이후 재사용이 불가합니다.
+				 * @param[in]	indices		: 버퍼에 담을 unsigned int index 데이터 배열
+				 * @param[in]	size		: index의 총 바이트 크기
+				 * @return	ID3D11Buffer	: 생성된 인덱스 버퍼 (실패 시, nullptr를 반환)
+				 */
+				ID3D11Buffer*		CreateStaticIndexBuffer(FZuint* indices, FZuint size);
+				/**
+				 * @brief	Dynamic Index Buffer를 생성합니다.
+				 * @details
+				 * - dynamic 속성으로 해당 버퍼는 할당 후 재사용 가능합니다.
+				 * @param[in]	size		: 생성할 버퍼의 바이트 크기
+				 * @return	ID3D11Buffer	: 생성된 인덱스 버퍼 (실패 시, nullptr를 반환)
+				 */
+				ID3D11Buffer*		CreateDynamicIndexBuffer(FZuint size);
+
+
+
 				/**
 				 * @brief	상수 버퍼를 생성
 				 * @param[in]	size		: 생성될 버퍼의 바이트 크기
@@ -112,7 +111,7 @@ namespace FZLib {
 				 * @param[in]	CPUupdates	: CPU 권한 활성화 여부
 				 * @return	ID3D11Buffer	: 생성된 상수 버퍼 (실패 시, nullptr를 반환)
 				 */
-				ID3D11Buffer*		CreateConstantBuffer(unsigned int size, bool dynamic, bool CPUupdates, D3D11_SUBRESOURCE_DATA* pData = nullptr);
+				ID3D11Buffer*		CreateConstantBuffer(FZuint size, FZbool dynamic, FZbool CPUupdates, D3D11_SUBRESOURCE_DATA* pData = nullptr);
 				/**
 				 * @brief	구조적 버퍼를 생성
 				 * @param[in]	size		: 생성될 버퍼의 바이트 크기
@@ -120,33 +119,21 @@ namespace FZLib {
 				 * @param[in]	CPUupdates	: CPU 권한 활성화 여부
 				 * @return	ID3D11Buffer	: 생성된 상수 버퍼 (실패 시, nullptr를 반환)
 				 */
-				ID3D11Buffer*		CreateStructuredBuffer(unsigned int count, unsigned int structSize, bool CPUwritable, bool GPUwritable, D3D11_SUBRESOURCE_DATA* pData = nullptr);
+				ID3D11Buffer*		CreateStructuredBuffer(FZuint count, FZuint structSize, FZbool CPUwritable, FZbool GPUwritable, D3D11_SUBRESOURCE_DATA* pData = nullptr);
 
 				ID3D11ShaderResourceView*	CreateBufferShaderResourceView(ID3D11Resource* pResource);
 				ID3D11UnorderedAccessView*	CreateBufferUnorderedAccessView(ID3D11Resource* pResource);
 				//-----------------------------------------------------------------------------
 
 
-				//-----------------------------------------------------------------------------
-				// Private member functions
-			private:
-				/**
-				 * @brief		현재 ResourceGenerator에 디바이스와 디바이스 컨텍스트에 대한 상태 객체를 저장
-				 * @details		리소스 생성에 필요한 디바이스와 디바이스 컨텍스트를 매 인스턴스 호출 시마다 쿼리합니다.
-				 *
-				 * @param[in]	deviceResource	: 리소스 생성에 사용될 디바이스 리소스
-				 */
-				void				SetDeviceResource(DeviceResource& deviceResource);
-				//-----------------------------------------------------------------------------
+
 
 				//-----------------------------------------------------------------------------
-				// Member variables
+				// static variables
 			private:
 				static std::unique_ptr<ResourceGenerator>		s_pInstance;
-				static std::map<std::string, DeviceResource>	s_mDeviceResources;
-				static DeviceResource*							s_CurrDeviceResource;
-				static ID3D11Device*							s_CurrDevice;
-				static ID3D11DeviceContext*						s_CurrDeviceContext;
+				static ID3D11Device*							s_pCurrUsedDevice;
+				static ID3D11DeviceContext*						s_pCurrUsedContext;
 
 				//-----------------------------------------------------------------------------
 			}; // class ResourceGenerator

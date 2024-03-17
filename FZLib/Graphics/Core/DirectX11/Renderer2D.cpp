@@ -28,7 +28,7 @@ namespace FZLib {
 		{
 			++s_RendererCount;
 			this->SetRendererID(name, s_RendererCount);
-			StartUp(hwnd, width, height);
+			Initialize(hwnd, width, height);
 		}
 
 		Renderer2D::~Renderer2D()
@@ -37,7 +37,7 @@ namespace FZLib {
 			Shutdown();
 		}
 
-		bool Renderer2D::StartUp(const HWND& hwnd, int width, int height)
+		bool Renderer2D::Initialize(const HWND& hwnd, int width, int height)
 		{
 			if (m_Initialized == true)
 				return false;

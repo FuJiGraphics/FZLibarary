@@ -112,9 +112,26 @@
          34개 파일이 복사되었습니다.
   pch.cpp
   Buffer.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   dllmain.cpp
   Buffer.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  Device.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   ResourceGenerator.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   LogHelper.cpp
 d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
 d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
@@ -122,15 +139,27 @@ d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): 
 d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   StringHelper.cpp
   DeviceResource.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Renderer2D.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Renderer2D.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   코드를 생성하고 있습니다...
-..\Dist\log\Release\Buffer.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
-..\Dist\log\Release\Renderer2D.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+..\Dist\log\Debug\Buffer.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+..\Dist\log\Debug\Renderer2D.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
      ..\Dist\log\FZLib.lib 라이브러리 및 ..\Dist\log\FZLib.exp 개체를 생성하고 있습니다.
   FZLib.vcxproj -> D:\Dev\FZLib\FZLib\..\Dist\log\FZLib.dll
   ..\Dist\log\FZLib.lib
           1개 파일이 복사되었습니다.
   ..\Dist\log\FZLib.dll
           1개 파일이 복사되었습니다.
-  ..\Dist\log\Release\FZLib.log - 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
+  ..\Dist\log\Debug\FZLib.log - 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.

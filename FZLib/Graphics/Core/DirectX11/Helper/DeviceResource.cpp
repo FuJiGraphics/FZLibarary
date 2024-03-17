@@ -48,8 +48,11 @@ namespace FZLib {
 			{
 				bool result = false;
 				m_Initialized = false;
+				m_DeviceContext->Release();
 				m_DeviceContext.Reset();
+				m_SwapChain->Release();
 				m_SwapChain.Reset();
+				m_Device->Release();                          
 				m_Device.Reset();
 				result = ReleaseBackBuffer();
 				return result;

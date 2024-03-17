@@ -18,14 +18,22 @@
 
 // DLL Export Macros
 #ifdef FZLIB_EXPORTS
-#define FZLIB_API __declspec(dllexport)
+	#define FZLIB_API __declspec(dllexport)
 #else
-#define FZLIB_API __declspec(dllimport)
+	#define FZLIB_API __declspec(dllimport)
 #endif
 
-
-// Constant Variables
 namespace FZLib {
+
+	// Custom type info
+	using	FZuint		= std::uint32_t;
+	using	FZint		= std::int32_t;
+	using	FZfloat		= std::float_t;
+	using	FZbool		= bool;
+	enum {  FZtrue		= true
+		 ,	FZfalse		= false
+	}; 
+
 	/**
 	 * @brief	렌더링을 위한 RGB 구조체
 	 * @details	멤버는 모두 float 타입

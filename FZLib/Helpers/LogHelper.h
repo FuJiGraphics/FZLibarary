@@ -25,10 +25,8 @@ extern "C" {
 			};
 
 			struct Format {
-				static const std::string&&
-					SPACE, TEXT, COLOR, ASSIGN,
-					NAME, LINE, FILE, FUNC,
-					YEAR, MONTH, DAY, TIME;
+				static const std::string&&	
+					DEFAULT;
 			};
 
 		public:
@@ -40,8 +38,10 @@ extern "C" {
 			static void AddPattern(const std::string& format);
 			static void DelPattern(const std::string& format);
 
+			static void SetTemporaryFormat(const std::string& format);
 		public:
-			static std::shared_ptr<spdlog::logger> GetLogger();
+			static std::shared_ptr<spdlog::logger>	GetLogger();
+			static std::string&						GetLogFormat();
 
 		private:
 			static std::string						s_strLogFormat;
@@ -55,7 +55,24 @@ extern "C" {
 	#define FZLOG_WARN(...)			SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::warn, __VA_ARGS__);
 	#define FZLOG_ERROR(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::err, __VA_ARGS__);
 	#define FZLOG_CRITICAL(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::critical, __VA_ARGS__);
+
+// for debug modes
+#if defined(DEBUG) || defined(_DEBUG)
+	#define FZLOG_FAILED(boolean_value)						\
+{															\
+	if(!boolean_value)										\
+	{														\
+		LogSystem::SetTemporaryFormat(						\
+		LogSystem::Format::DEFAULT);						\
+		FZLOG_CRITICAL("Failed to execute operation.");		\
+		LogSystem::SetPattern(LogSystem::GetLogFormat());	\
+	}														\
+}
+#else
+	#define FZLOG_FAILED(boolean_value)
+#endif
 #pragma endregion 
+
 	} // namespace FZLib
-} 
+} // extern "C"
 #endif

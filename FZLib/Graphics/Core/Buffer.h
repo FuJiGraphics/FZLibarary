@@ -7,8 +7,8 @@
  *********************************************************************/
 
 #pragma once
-#ifndef __FZ_LIBRARY_RENDERER2D__
-#define __FZ_LIBRARY_RENDERER2D__
+#ifndef __FZ_LIBRARY_BUFFER__
+#define __FZ_LIBRARY_BUFFER__
 
 #include <Graphics/gcr.h>
 

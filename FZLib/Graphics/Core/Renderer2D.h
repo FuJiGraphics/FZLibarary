@@ -20,8 +20,8 @@ namespace FZLib {
 		static Renderer2D* Create(const std::string& name);
 
 	public: // Setup Devices in 2D Renderer
-		virtual bool StartUp(const HWND& hwnd, int width, int height) = 0;
-		virtual bool Shutdown() = 0;
+		virtual bool Initialize(const HWND& hwnd, int width, int height) = 0;
+		virtual bool CleanUp() = 0;
 		virtual void Bind() = 0;
 
 	public: // Getting metadata and Setting Metadata

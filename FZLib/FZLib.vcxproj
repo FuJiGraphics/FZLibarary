@@ -153,6 +153,7 @@ rmdir /S /Q "..\Dist\log\"</Command>
     <ClInclude Include="EntryPoint\pch.h" />
     <ClInclude Include="Graphics\Core\Buffer.h" />
     <ClInclude Include="Graphics\Core\DirectX11\CoreRef.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Device.h" />
     <ClInclude Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.h" />
     <ClInclude Include="Graphics\gcr.h" />
     <ClInclude Include="Helpers\LogHelper.h" />
@@ -271,6 +272,7 @@ rmdir /S /Q "..\Dist\log\"</Command>
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Graphics\Core\Buffer.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Device.cpp" />
     <ClCompile Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.cpp" />
     <ClCompile Include="Helpers\LogHelper.cpp" />
     <ClCompile Include="Helpers\StringHelper.cpp" />

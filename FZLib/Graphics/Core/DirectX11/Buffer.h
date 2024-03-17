@@ -7,8 +7,8 @@
  *********************************************************************/
 
 #pragma once
-#ifndef __FZ_LIBRARY_VERTEXBUFFER_DIRECTX11__
-#define __FZ_LIBRARY_VERTEXBUFFER_DIRECTX11__
+#ifndef __FZ_LIBRARY_BUFFER_DIRECTX11__
+#define __FZ_LIBRARY_BUFFER_DIRECTX11__
 
 #include "CoreRef.h"
 #include <Graphics/Core/Buffer.h>

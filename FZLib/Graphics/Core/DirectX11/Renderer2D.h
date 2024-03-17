@@ -24,7 +24,7 @@ namespace FZLib {
 			virtual ~Renderer2D();
 
 		public: // Setup Devices in 2D Renderer
-			virtual bool			StartUp(const HWND& hwnd, int width, int height) final;
+			virtual bool			Initialize(const HWND& hwnd, int width, int height) final;
 			virtual bool			Shutdown() final;
 
 		public: // Getter Setter Interface

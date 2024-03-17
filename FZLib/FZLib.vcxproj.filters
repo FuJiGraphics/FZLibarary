@@ -360,11 +360,12 @@
     <ClInclude Include="Graphics\Core\Renderer2D.h" />
     <ClInclude Include="Graphics\Core\Buffer.h" />
     <ClInclude Include="Graphics\gcr.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h" />
     <ClInclude Include="Graphics\Core\DirectX11\CoreRef.h" />
     <ClInclude Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceManager.h" />
     <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceResource.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Device.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint\dllmain.cpp">
@@ -383,7 +384,8 @@
     <ClCompile Include="Graphics\Core\Buffer.cpp" />
     <ClCompile Include="Graphics\Core\DirectX11\Buffer.cpp" />
     <ClCompile Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceManager.cpp" />
     <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceResource.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Device.cpp" />
   </ItemGroup>
 </Project>
