@@ -9,12 +9,13 @@ namespace FZLib {
 					   HWND hwnd, FZuint w, FZuint h,
 					   D3D_DRIVER_TYPE type = D3D_DRIVER_TYPE_HARDWARE)
 			: m_vData()
+			, m_vWinData{}
 			, m_strDeviceName(deviceName)
-			, m_hWinHandle(hwnd)
-			, m_iWinWidth(w)
-			, m_iWinHeight(h)
 			, m_eDriverType(type)
 		{ 
+			m_vWinData.Handle = hwnd;
+			m_vWinData.Width  = w;
+			m_vWinData.Height = h;
 			this->Initialize();
 		}
 
@@ -88,11 +89,11 @@ namespace FZLib {
 			sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 			sd.SampleDesc.Count = 1;
 			sd.SampleDesc.Quality = 0;
-			sd.BufferDesc.Width = m_iWinWidth;
-			sd.BufferDesc.Height = m_iWinHeight;
+			sd.BufferDesc.Width = m_vWinData.Width;
+			sd.BufferDesc.Height = m_vWinData.Height;
 			sd.BufferDesc.RefreshRate.Numerator = 60;
 			sd.BufferDesc.RefreshRate.Denominator = 1;
-			sd.OutputWindow = m_hWinHandle;
+			sd.OutputWindow = m_vWinData.Handle;
 			// Create a Device, DeviceContext, SwapChain
 			HRESULT hr = D3D11CreateDeviceAndSwapChain(
 				nullptr, D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_HARDWARE, nullptr, deviceFlags,
@@ -100,37 +101,38 @@ namespace FZLib {
 				&sd, &m_vData.SwapChain, &m_vData.Device,
 				&m_vData.FeatureLevel, &m_vData.DeviceContext
 			);
-			return ((SUCCEEDED(hr)) ? FZtrue : FZfalse);
+			return (SUCCEEDED(hr));
 		}
 
 		FZbool Device::CreateBackBufferAndViewport()
 		{
-			hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&m_BackBuffer);
-			hr = m_Device->CreateRenderTargetView(m_BackBuffer.Get(), nullptr, m_RenderTarget.GetAddressOf());
+			HRESULT hr = S_OK;
+			hr = m_vData.SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&m_vData.SwapChainBackBuffer);
+			hr = m_vData.Device->CreateRenderTargetView(m_vData.SwapChainBackBuffer, nullptr, &m_vData.RenderTargetView);
 
 			// Create a depth-stencil view for use with 3D rendering if needed.
-			m_BackBuffer->GetDesc(&m_bbDesc);
+			m_vData.SwapChainBackBuffer->GetDesc(&m_vData.BackBufferDesc);
 			CD3D11_TEXTURE2D_DESC depthStencilDesc(
 				DXGI_FORMAT_D24_UNORM_S8_UINT,
-				static_cast<UINT> (m_bbDesc.Width),
-				static_cast<UINT> (m_bbDesc.Height),
+				static_cast<UINT> (m_vData.BackBufferDesc.Width),
+				static_cast<UINT> (m_vData.BackBufferDesc.Height),
 				1, // This depth stencil view has only one texture.
 				1, // Use a single mipmap level.
 				D3D11_BIND_DEPTH_STENCIL
 			);
 
-			m_Device->CreateTexture2D(&depthStencilDesc, nullptr, &m_DepthStencil);
+			m_vData.Device->CreateTexture2D(&depthStencilDesc, nullptr, &m_vData.DepthStencilBuffer);
 			CD3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc(D3D11_DSV_DIMENSION_TEXTURE2D);
-			m_Device->CreateDepthStencilView(m_DepthStencil.Get(), &depthStencilViewDesc, &m_DepthStencilView);
+			m_vData.Device->CreateDepthStencilView(m_vData.DepthStencilBuffer, &depthStencilViewDesc, &m_vData.DepthStencilView);
 
-			ZeroMemory(&m_Viewport, sizeof(D3D11_VIEWPORT));
-			m_Viewport.Height = (float)m_bbDesc.Height;
-			m_Viewport.Width = (float)m_bbDesc.Width;
-			m_Viewport.MinDepth = 0;
-			m_Viewport.MaxDepth = 1;
+			ZeroMemory(&m_vData.Viewport, sizeof(D3D11_VIEWPORT));
+			m_vData.Viewport.Height = (float)m_vData.BackBufferDesc.Height;
+			m_vData.Viewport.Width = (float)m_vData.BackBufferDesc.Width;
+			m_vData.Viewport.MinDepth = 0;
+			m_vData.Viewport.MaxDepth = 1;
 
-			m_DeviceContext->RSSetViewports(1, &m_Viewport);
-			return (hr == S_OK) ? true : false;
+			m_vData.DeviceContext->RSSetViewports(1, &m_vData.Viewport);
+			return (SUCCEEDED(hr));
 		}
 
 

@@ -12,7 +12,6 @@
 
 #include "CoreRef.h"
 #include <Graphics/Core/Buffer.h>
-#include "Helper/DeviceResource.h"
 
 namespace FZLib {
 	namespace DirectX11 {

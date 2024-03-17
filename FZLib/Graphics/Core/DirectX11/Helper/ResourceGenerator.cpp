@@ -21,6 +21,7 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateVertexBuffer(FZuint size, FZbool dynamic, FZbool streamout, D3D11_SUBRESOURCE_DATA* pData)
 			{
+				FZLOG_FAILED(size > 0);
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = size;
 				desc.MiscFlags = 0;
@@ -35,13 +36,7 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateStaticVertexBuffer(FZfloat* vertices, FZuint size, FZbool streamOut)
 			{
-#ifdef _DEBUG
-				if (size < 0)
-				{
-					FZLOG_ERROR("Failed to Create Static Vertex Buffer! -> An OverFlow occurred");
-					return nullptr;
-				}
-#endif
+				FZLOG_FAILED(size > 0);
 				D3D11_SUBRESOURCE_DATA vData;
 				ZeroMemory(&vData, sizeof(D3D11_SUBRESOURCE_DATA));
 				vData.pSysMem = vertices;
@@ -52,18 +47,13 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateDynamicVertexBuffer(FZuint size, FZbool streamOut)
 			{
-#ifdef _DEBUG
-				if (size < 0)
-				{
-					FZLOG_ERROR("Failed to Create Dynamic Vertex Buffer! -> An OverFlow occurred");
-					return nullptr;
-				}
-#endif
+				FZLOG_FAILED(size > 0);
 				return (this->CreateVertexBuffer(size, FZtrue, streamOut, nullptr));;
 			}
 
 			ID3D11Buffer* ResourceGenerator::CreateIndexBuffer(FZuint size, FZbool dynamic, D3D11_SUBRESOURCE_DATA* pData)
 			{
+				FZLOG_FAILED(size > 0);
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = size;
 				desc.MiscFlags = 0;
@@ -78,13 +68,7 @@ namespace FZLib {
 
 			ID3D11Buffer * ResourceGenerator::CreateStaticIndexBuffer(FZuint* indices, FZuint size)
 			{
-#ifdef _DEBUG
-				if (size < 0)
-				{
-					FZLOG_ERROR("Failed to Create Static Index Buffer! -> An OverFlow occurred");
-					return nullptr;
-				}
-#endif
+				FZLOG_FAILED(size > 0);
 				D3D11_SUBRESOURCE_DATA vData;
 				ZeroMemory(&vData, sizeof(D3D11_SUBRESOURCE_DATA));
 				vData.pSysMem = indices;
@@ -95,18 +79,13 @@ namespace FZLib {
 
 			ID3D11Buffer * ResourceGenerator::CreateDynamicIndexBuffer(FZuint size)
 			{
-#ifdef _DEBUG
-				if (size < 0)
-				{
-					FZLOG_ERROR("Failed to Create Dynamic Index Buffer! -> An OverFlow occurred");
-					return nullptr;
-				}
-#endif
+				FZLOG_FAILED(size > 0);
 				return (this->CreateIndexBuffer(size, FZtrue, nullptr));;
 			}
 
 			ID3D11Buffer* ResourceGenerator::CreateConstantBuffer(FZuint size, FZbool dynamic, FZbool CPUupdates, D3D11_SUBRESOURCE_DATA * pData)
 			{
+				FZLOG_FAILED(size > 0);
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = size;
 				desc.MiscFlags = 0;
@@ -134,6 +113,7 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateStructuredBuffer(FZuint count, FZuint structSize, FZbool CPUwritable, FZbool GPUwritable, D3D11_SUBRESOURCE_DATA* pData)
 			{
+				FZLOG_FAILED(count > 0 || structSize > 0);
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = count * structSize;
 				desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;

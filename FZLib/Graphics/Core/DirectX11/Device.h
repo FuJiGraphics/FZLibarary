@@ -16,10 +16,6 @@
 namespace FZLib {
 	namespace DirectX11 {
 
-		struct WinInfo {
-
-		};
-
 		class FZLIB_API Device
 		{
 		public:
@@ -47,10 +43,8 @@ namespace FZLib {
 
 		private:
 			DeviceResources			m_vData; 
+			WindowInfo				m_vWinData;
 			std::string				m_strDeviceName;
-			HWND					m_hWinHandle;
-			FZuint					m_iWinWidth;
-			FZuint					m_iWinHeight;
 			D3D_DRIVER_TYPE			m_eDriverType;
 		};
 

@@ -8,7 +8,7 @@
 
 #include <pch.h>
 #include "Buffer.h"
-#include "Helper/ResourceGenerator.h"
+#include "Device.h"
 
 namespace FZLib {
 	namespace DirectX11 {
@@ -18,7 +18,7 @@ namespace FZLib {
 		VertexBuffer::VertexBuffer(unsigned int size)
 		{
 			// Create the vertex buffer.
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
+			auto& resGen = Device
 			m_VertexBuffer = resGen.CreateVertexBuffer(size, true, false);
 		}
 

@@ -38,9 +38,9 @@ namespace FZLib {
 	namespace DirectX11 {
 		
 		struct WindowInfo {
-			HWND	Handle;
-			FZuint	Width;
-			FZuint	Height;
+			HWND	Handle	= NULL;
+			FZuint	Width	= 0;
+			FZuint	Height	= 0;
 		};
 
 		// Feature Levels
@@ -67,7 +67,9 @@ namespace FZLib {
 			ID3D11RenderTargetView*	RenderTargetView		= nullptr;
 			ID3D11Texture2D*        DepthStencilBuffer		= nullptr;
 			ID3D11DepthStencilView* DepthStencilView		= nullptr;
+			D3D11_TEXTURE2D_DESC	BackBufferDesc;
 			D3D_FEATURE_LEVEL		FeatureLevel;
+			D3D11_VIEWPORT			Viewport;
 
 			inline FZbool Release()
 			{
