@@ -20,31 +20,21 @@ extern "C" {
 		class FZLIB_API LogSystem
 		{
 		public:
-			enum class Pattern {
-				Blank, Simple, LineScan, FunctionScan
-			};
-
-			struct Format {
-				static const std::string&&	
-					DEFAULT;
-			};
-
-		public:
 			static bool Initialize();
 			static void ClearPattern();
+			static void	RevertFormat();
 
-			static void SetPattern(Pattern p);
 			static void SetPattern(const std::string& format);
 			static void AddPattern(const std::string& format);
 			static void DelPattern(const std::string& format);
-
-			static void SetTemporaryFormat(const std::string& format);
 		public:
 			static std::shared_ptr<spdlog::logger>	GetLogger();
-			static std::string&						GetLogFormat();
+			static std::string						GetCurrFormat();
+			static std::string						GetPrevFormat();
 
 		private:
-			static std::string						s_strLogFormat;
+			static std::string						s_prevFormat;
+			static std::string						s_currFormat;
 			static std::shared_ptr<spdlog::logger>	s_pLogger;
 		};
 
@@ -56,21 +46,25 @@ extern "C" {
 	#define FZLOG_ERROR(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::err, __VA_ARGS__);
 	#define FZLOG_CRITICAL(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::critical, __VA_ARGS__);
 
-// for debug modes
-#if defined(DEBUG) || defined(_DEBUG)
-	#define FZLOG_FAILED(boolean_value)						\
-{															\
-	if(!boolean_value)										\
-	{														\
-		LogSystem::SetTemporaryFormat(						\
-		LogSystem::Format::DEFAULT);						\
-		FZLOG_CRITICAL("Failed to execute operation.");		\
-		LogSystem::SetPattern(LogSystem::GetLogFormat());	\
-	}														\
-}
-#else
-	#define FZLOG_FAILED(boolean_value)
-#endif
+	#if defined(DEBUG) || defined(_DEBUG)
+		#define FZLOG_SUCCEED(boolean_value)	boolean_value;\
+			if(boolean_value)\
+			{\
+				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
+				FZLOG_CRITICAL("Succeed to execute operation.")\
+				FZLib::LogSystem::RevertFormat();\
+			}
+		#define FZLOG_FAILED(boolean_value)		boolean_value;\
+			if(!boolean_value)\
+			{\
+				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
+				FZLOG_CRITICAL("Failed to execute operation.");\
+				FZLib::LogSystem::RevertFormat();\
+			}
+	#else
+		#define FZLOG_SUCCEED(boolean_value) boolean_value;
+		#define FZLOG_FAILED(boolean_value)	boolean_value;
+	#endif
 #pragma endregion 
 
 	} // namespace FZLib

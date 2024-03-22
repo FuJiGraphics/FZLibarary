@@ -8,10 +8,12 @@
 
 #include <pch.h>
 #include "Renderer2D.h"
-#include "Helper/ResourceGenerator.h"
+#include "Helpers/DeviceManager.h"
 
 namespace FZLib {
 	namespace DirectX11 {
+
+		using namespace Helpers;
 
 		int Renderer2D::s_RendererCount = 0;
 
@@ -28,7 +30,7 @@ namespace FZLib {
 		{
 			++s_RendererCount;
 			this->SetRendererID(name, s_RendererCount);
-			Initialize(hwnd, width, height);
+			StartUp(hwnd, width, height);
 		}
 
 		Renderer2D::~Renderer2D()
@@ -37,7 +39,7 @@ namespace FZLib {
 			Shutdown();
 		}
 
-		bool Renderer2D::Initialize(const HWND& hwnd, int width, int height)
+		bool Renderer2D::StartUp(const HWND& hwnd, int width, int height)
 		{
 			if (m_Initialized == true)
 				return false;
@@ -47,8 +49,7 @@ namespace FZLib {
 			m_Width = width;
 			m_Height = height;
 
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			return (resGen.GenerateDeviceResources(m_RendererID, hwnd, width, height));
+			return (DeviceManager::CreateDevice(m_RendererID, m_Hwnd, m_Width, m_Height));
 		}
 
 		bool Renderer2D::Shutdown()
@@ -56,8 +57,7 @@ namespace FZLib {
 			if (m_Initialized == false)
 				return (false);
 			m_Initialized = false;
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			return (resGen.ReleaseDeviceResources());
+			return (DeviceManager::ReleaseDevice(m_RendererID));
 		}
 
 		std::string Renderer2D::GetDeviceInfo()
@@ -65,9 +65,15 @@ namespace FZLib {
 			return Specification::DirectX11;
 		}
 
-		void Renderer2D::RenderFrame()
+		void Renderer2D::Begin()
 		{
+		}
 
+		void Renderer2D::End()
+		{
+			auto* device = DeviceManager::GetDevice(m_RendererID);
+			FZLOG_FAILED(device);
+			device->Present();
 		}
 
 	} // namespace DirectX11

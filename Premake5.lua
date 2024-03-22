@@ -9,6 +9,7 @@ workspace "FZLib"
 	}
 	
 	helperDir = "FZLib/Helpers/"
+	graphicsDir = "FZLib/Graphics/"
 	spdlogDir = "FZLib/Vendor/spdlog/"
 
 	IncludeDir = {}
@@ -31,16 +32,18 @@ workspace "FZLib"
 	prebuildcommands
 	{
 		"{MKDIR} %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
-		"{MKDIR} %[Dist/include/]",
-		"{MKDIR} %[Dist/include/FZLib]",
 		"{MKDIR} %[Dist/include/FZLib/Helpers]",
-		"{MKDIR} %[Dist/include/spdlog]",
+		"{MKDIR} %[Dist/include/FZLib/Graphics/Core/DirectX11/Helpers]",
 		"{MKDIR} %[Dist/include/spdlog/cfg]",
 		"{MKDIR} %[Dist/include/spdlog/details]",
 		"{MKDIR} %[Dist/include/spdlog/fmt]",
 		"{MKDIR} %[Dist/include/spdlog/fmt/bundled]",
 		"{MKDIR} %[Dist/include/spdlog/sinks]",
 		"{COPYFILE} %["..helperDir.."/**.h] %[Dist/include/FZLib/Helpers/]",
+		"{COPYFILE} %["..graphicsDir.."/**.h] %[Dist/include/FZLib/Graphics/]",
+		"{COPYFILE} %["..graphicsDir.."/Core/**.h] %[Dist/include/FZLib/Graphics/Core/]",
+		"{COPYFILE} %["..graphicsDir.."/Core/DirectX11/**.h] %[Dist/include/FZLib/Graphics/Core/DirectX11/]",
+		"{COPYFILE} %["..graphicsDir.."/Core/DirectX11/Helpers/**.h] %[Dist/include/FZLib/Graphics/Core/DirectX11/Helpers/]",
 		"{COPYFILE} %["..spdlogDir.."/include/spdlog/**.h] %[Dist/include/spdlog/]",
 		"{COPYFILE} %["..spdlogDir.."/include/spdlog/cfg/**.h] %[Dist/include/spdlog/cfg/]",
 		"{COPYFILE} %["..spdlogDir.."/include/spdlog/details/**.h] %[Dist/include/spdlog/details/]",

@@ -8,42 +8,45 @@
 
 #include <pch.h>
 #include "Buffer.h"
-#include "Device.h"
+#include "Helpers/DeviceManager.h"
 
 namespace FZLib {
 	namespace DirectX11 {
+
+		using namespace Helpers;
+
 		//-----------------------------------------------------------------------------
 		// Vertex Buffer Member Funtions
 		//-----------------------------------------------------------------------------
 		VertexBuffer::VertexBuffer(unsigned int size)
 		{
 			// Create the vertex buffer.
-			auto& resGen = Device
-			m_VertexBuffer = resGen.CreateVertexBuffer(size, true, false);
+			Device* device = DeviceManager::GetDevice();                                                                                                                                                                                                                                     
+			m_VertexBuffer = device->CreateVertexBuffer(size);
 		}
 
 		VertexBuffer::~VertexBuffer()
 		{
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			ID3D11DeviceContext* dc = resGen.GetCurrentDeviceContext();
-			dc->Unmap(m_VertexBuffer, 0);
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			dc.Unmap(m_VertexBuffer, 0);
 			m_MappedResource.reset();
 		}
 
 		bool VertexBuffer::Bind()
 		{
 			ResetSubResource(m_MappedResource);
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			ID3D11DeviceContext* dc = resGen.GetCurrentDeviceContext();
-			dc->Map(m_VertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &(*m_MappedResource));
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			dc.Map(m_VertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &(*m_MappedResource));
 			return true;
 		}
 
 		bool VertexBuffer::UnBind()
 		{
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			ID3D11DeviceContext* dc = resGen.GetCurrentDeviceContext();
-			dc->Unmap(m_VertexBuffer, 0);
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			dc.Unmap(m_VertexBuffer, 0);
 			return true;
 		}
 
@@ -60,39 +63,39 @@ namespace FZLib {
 			ZeroMemory(&(*subres), sizeof(D3D11_MAPPED_SUBRESOURCE));
 		}
 
-
 		//-----------------------------------------------------------------------------
 		// Index Buffer Member Funtions
 		//-----------------------------------------------------------------------------
 		IndexBuffer::IndexBuffer(unsigned int size)
 		{
 			// Create the buffer with the device.
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			m_IndexBuffer = resGen.CreateIndexBuffer(size, true);
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			m_IndexBuffer = device->CreateIndexBuffer(size);
 		}
 
 		IndexBuffer::~IndexBuffer()
 		{
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			ID3D11DeviceContext* dc = resGen.GetCurrentDeviceContext();
-			dc->Unmap(m_IndexBuffer, 0);
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			dc.Unmap(m_IndexBuffer, 0);
 			m_MappedResource.reset();
 		}
 
 		bool IndexBuffer::Bind()
 		{
 			ResetSubResource(m_MappedResource);
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			ID3D11DeviceContext* dc = resGen.GetCurrentDeviceContext();
-			dc->Map(m_IndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &(*m_MappedResource));
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			dc.Map(m_IndexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &(*m_MappedResource));
 			return true;
 		}
 
 		bool IndexBuffer::UnBind()
 		{
-			auto& resGen = Helper::ResourceGenerator::GetInstance();
-			ID3D11DeviceContext* dc = resGen.GetCurrentDeviceContext();
-			dc->Unmap(m_IndexBuffer, 0);
+			Device* device = DeviceManager::GetDevice();
+			ID3D11DeviceContext& dc = device->GetNativeContext();
+			dc.Unmap(m_IndexBuffer, 0);
 			return true;
 		}
 

@@ -10,13 +10,13 @@
 #ifndef __FZ_LIBRARY_RESOURCE_GENERATOR_DIRECTX11__
 #define	__FZ_LIBRARY_RESOURCE_GENERATOR_DIRECTX11__
 
-#include <Graphics/Core/DirectX11/CoreRef.h>
-#include <Graphics/gcr.h>
+#include "../CoreRef.h"
+#include "../../../gcr.h"
 #include "../Device.h"
 
 namespace FZLib {
 	namespace DirectX11 {
-		namespace Helper {
+		namespace Helpers {
 			/**
 			 * @brief		DirectX11 리소스를 생성하는 헬퍼 클래스
 			 * @details		사용하기 위해서는 인스턴스 생성 시 device 및 device context를 제공해야 합니다.

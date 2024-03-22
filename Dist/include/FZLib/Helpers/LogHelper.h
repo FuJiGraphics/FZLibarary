@@ -20,31 +20,21 @@ extern "C" {
 		class FZLIB_API LogSystem
 		{
 		public:
-			enum class Pattern {
-				Blank, Simple, LineScan, FunctionScan
-			};
-
-			struct Format {
-				static const std::string&&
-					SPACE, TEXT, COLOR, ASSIGN,
-					NAME, LINE, FILE, FUNC,
-					YEAR, MONTH, DAY, TIME;
-			};
-
-		public:
 			static bool Initialize();
 			static void ClearPattern();
+			static void	RevertFormat();
 
-			static void SetPattern(Pattern p);
 			static void SetPattern(const std::string& format);
 			static void AddPattern(const std::string& format);
 			static void DelPattern(const std::string& format);
-
 		public:
-			static std::shared_ptr<spdlog::logger> GetLogger();
+			static std::shared_ptr<spdlog::logger>	GetLogger();
+			static std::string						GetCurrFormat();
+			static std::string						GetPrevFormat();
 
 		private:
-			static std::string						s_strLogFormat;
+			static std::string						s_prevFormat;
+			static std::string						s_currFormat;
 			static std::shared_ptr<spdlog::logger>	s_pLogger;
 		};
 
@@ -55,7 +45,28 @@ extern "C" {
 	#define FZLOG_WARN(...)			SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::warn, __VA_ARGS__);
 	#define FZLOG_ERROR(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::err, __VA_ARGS__);
 	#define FZLOG_CRITICAL(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::critical, __VA_ARGS__);
+
+	#if defined(DEBUG) || defined(_DEBUG)
+		#define FZLOG_SUCCEED(boolean_value)	boolean_value;\
+			if(boolean_value)\
+			{\
+				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
+				FZLOG_CRITICAL("Succeed to execute operation.")\
+				FZLib::LogSystem::RevertFormat();\
+			}
+		#define FZLOG_FAILED(boolean_value)		boolean_value;\
+			if(!boolean_value)\
+			{\
+				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
+				FZLOG_CRITICAL("Failed to execute operation.");\
+				FZLib::LogSystem::RevertFormat();\
+			}
+	#else
+		#define FZLOG_SUCCEED(boolean_value) boolean_value;
+		#define FZLOG_FAILED(boolean_value)	boolean_value;
+	#endif
 #pragma endregion 
+
 	} // namespace FZLib
-} 
+} // extern "C"
 #endif

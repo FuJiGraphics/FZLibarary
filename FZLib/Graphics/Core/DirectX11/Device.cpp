@@ -1,21 +1,22 @@
 #include "pch.h"
 #include "Device.h"
-#include "Helper/ResourceGenerator.h"
+#include "Helpers/ResourceGenerator.h"
 
 namespace FZLib {
 	namespace DirectX11 {
 
-		Device::Device(std::string& deviceName, 
-					   HWND hwnd, FZuint w, FZuint h,
-					   D3D_DRIVER_TYPE type = D3D_DRIVER_TYPE_HARDWARE)
-			: m_vData()
-			, m_vWinData{}
-			, m_strDeviceName(deviceName)
-			, m_eDriverType(type)
+		using namespace Helpers;
+
+		Device::Device(const std::string& dcName, HWND hwnd, 
+					   FZuint w, FZuint h, D3D_DRIVER_TYPE type)
+			: m_Data()
+			, m_WinData()
+			, m_DeviceName(dcName)
+			, m_DriverType(type)
 		{ 
-			m_vWinData.Handle = hwnd;
-			m_vWinData.Width  = w;
-			m_vWinData.Height = h;
+			m_WinData.Handle = hwnd;
+			m_WinData.Width  = w;
+			m_WinData.Height = h;
 			this->Initialize();
 		}
 
@@ -28,7 +29,7 @@ namespace FZLib {
 		{
 			// Create a vertex buffer.
 			ID3D11Buffer* pBuffer = nullptr;
-			auto& resGen = Helper::ResourceGenerator::GetInstance(*this);
+			auto& resGen = ResourceGenerator::GetInstance(*this);
 			pBuffer = resGen.CreateDynamicVertexBuffer(size);
 			return (pBuffer);
 		}
@@ -37,7 +38,7 @@ namespace FZLib {
 		{
 			// Create a vertex buffer.
 			ID3D11Buffer* pBuffer = nullptr;
-			auto& resGen = Helper::ResourceGenerator::GetInstance(*this);
+			auto& resGen = ResourceGenerator::GetInstance(*this);
 			pBuffer = resGen.CreateStaticVertexBuffer(vertices, size);
 			return (pBuffer);
 		}
@@ -46,7 +47,7 @@ namespace FZLib {
 		{
 			// Create the buffer with the device.
 			ID3D11Buffer* pBuffer = nullptr;
-			auto& resGen = Helper::ResourceGenerator::GetInstance(*this);
+			auto& resGen = ResourceGenerator::GetInstance(*this);
 			pBuffer = resGen.CreateDynamicIndexBuffer(size);
 			return (pBuffer);
 		}
@@ -55,9 +56,17 @@ namespace FZLib {
 		{
 			// Create the buffer with the device.
 			ID3D11Buffer* pBuffer = nullptr;
-			auto& resGen = Helper::ResourceGenerator::GetInstance(*this);
+			auto& resGen = ResourceGenerator::GetInstance(*this);
 			pBuffer = resGen.CreateStaticIndexBuffer(indices, size);
 			return (pBuffer);
+		}
+
+		void Device::Present()
+		{
+			static float color[4] = { 0.0f, 0.2f, 0.4f, 1.0f };
+			m_Data.DeviceContext->OMSetRenderTargets(1, &m_Data.RenderTargetView, m_Data.DepthStencilView);
+			m_Data.DeviceContext->ClearRenderTargetView(m_Data.RenderTargetView, color);
+			m_Data.SwapChain->Present(1, 0);
 		}
 
 		FZbool Device::Initialize()
@@ -67,11 +76,12 @@ namespace FZLib {
 			FZLOG_FAILED(result);
 			result = this->CreateBackBufferAndViewport();
 			FZLOG_FAILED(result);
+			return (result);
 		}
 
 		FZbool Device::CleanUp()
 		{
-			return (m_vData.Release());
+			return (m_Data.Release());
 		}
 
 		FZbool Device::CreateDeviceAndSwapChain()
@@ -89,17 +99,17 @@ namespace FZLib {
 			sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 			sd.SampleDesc.Count = 1;
 			sd.SampleDesc.Quality = 0;
-			sd.BufferDesc.Width = m_vWinData.Width;
-			sd.BufferDesc.Height = m_vWinData.Height;
+			sd.BufferDesc.Width = m_WinData.Width;
+			sd.BufferDesc.Height = m_WinData.Height;
 			sd.BufferDesc.RefreshRate.Numerator = 60;
 			sd.BufferDesc.RefreshRate.Denominator = 1;
-			sd.OutputWindow = m_vWinData.Handle;
+			sd.OutputWindow = m_WinData.Handle;
 			// Create a Device, DeviceContext, SwapChain
 			HRESULT hr = D3D11CreateDeviceAndSwapChain(
 				nullptr, D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_HARDWARE, nullptr, deviceFlags,
 				ConfigFeatureLevel::Targets, ConfigFeatureLevel::Nums, D3D11_SDK_VERSION,
-				&sd, &m_vData.SwapChain, &m_vData.Device,
-				&m_vData.FeatureLevel, &m_vData.DeviceContext
+				&sd, &m_Data.SwapChain, &m_Data.Device,
+				&m_Data.FeatureLevel, &m_Data.DeviceContext
 			);
 			return (SUCCEEDED(hr));
 		}
@@ -107,31 +117,31 @@ namespace FZLib {
 		FZbool Device::CreateBackBufferAndViewport()
 		{
 			HRESULT hr = S_OK;
-			hr = m_vData.SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&m_vData.SwapChainBackBuffer);
-			hr = m_vData.Device->CreateRenderTargetView(m_vData.SwapChainBackBuffer, nullptr, &m_vData.RenderTargetView);
+			hr = m_Data.SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&m_Data.SwapChainBackBuffer);
+			hr = m_Data.Device->CreateRenderTargetView(m_Data.SwapChainBackBuffer, nullptr, &m_Data.RenderTargetView);
 
 			// Create a depth-stencil view for use with 3D rendering if needed.
-			m_vData.SwapChainBackBuffer->GetDesc(&m_vData.BackBufferDesc);
+			m_Data.SwapChainBackBuffer->GetDesc(&m_Data.BackBufferDesc);
 			CD3D11_TEXTURE2D_DESC depthStencilDesc(
 				DXGI_FORMAT_D24_UNORM_S8_UINT,
-				static_cast<UINT> (m_vData.BackBufferDesc.Width),
-				static_cast<UINT> (m_vData.BackBufferDesc.Height),
+				static_cast<UINT> (m_Data.BackBufferDesc.Width),
+				static_cast<UINT> (m_Data.BackBufferDesc.Height),
 				1, // This depth stencil view has only one texture.
 				1, // Use a single mipmap level.
 				D3D11_BIND_DEPTH_STENCIL
 			);
 
-			m_vData.Device->CreateTexture2D(&depthStencilDesc, nullptr, &m_vData.DepthStencilBuffer);
+			m_Data.Device->CreateTexture2D(&depthStencilDesc, nullptr, &m_Data.DepthStencilBuffer);
 			CD3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc(D3D11_DSV_DIMENSION_TEXTURE2D);
-			m_vData.Device->CreateDepthStencilView(m_vData.DepthStencilBuffer, &depthStencilViewDesc, &m_vData.DepthStencilView);
+			m_Data.Device->CreateDepthStencilView(m_Data.DepthStencilBuffer, &depthStencilViewDesc, &m_Data.DepthStencilView);
 
-			ZeroMemory(&m_vData.Viewport, sizeof(D3D11_VIEWPORT));
-			m_vData.Viewport.Height = (float)m_vData.BackBufferDesc.Height;
-			m_vData.Viewport.Width = (float)m_vData.BackBufferDesc.Width;
-			m_vData.Viewport.MinDepth = 0;
-			m_vData.Viewport.MaxDepth = 1;
+			ZeroMemory(&m_Data.Viewport, sizeof(D3D11_VIEWPORT));
+			m_Data.Viewport.Height = (float)m_Data.BackBufferDesc.Height;
+			m_Data.Viewport.Width = (float)m_Data.BackBufferDesc.Width;
+			m_Data.Viewport.MinDepth = 0;
+			m_Data.Viewport.MaxDepth = 1;
 
-			m_vData.DeviceContext->RSSetViewports(1, &m_vData.Viewport);
+			m_Data.DeviceContext->RSSetViewports(1, &m_Data.Viewport);
 			return (SUCCEEDED(hr));
 		}
 

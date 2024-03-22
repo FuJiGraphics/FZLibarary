@@ -76,16 +76,18 @@
     </Link>
     <PreBuildEvent>
       <Command>IF NOT EXIST "..\Dist\lib\Debug\x86_64\" (mkdir "..\Dist\lib\Debug\x86_64\")
-IF NOT EXIST "..\Dist\include\" (mkdir "..\Dist\include\")
-IF NOT EXIST "..\Dist\include\FZLib" (mkdir "..\Dist\include\FZLib")
 IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
-IF NOT EXIST "..\Dist\include\spdlog" (mkdir "..\Dist\include\spdlog")
+IF NOT EXIST "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers" (mkdir "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers")
 IF NOT EXIST "..\Dist\include\spdlog\cfg" (mkdir "..\Dist\include\spdlog\cfg")
 IF NOT EXIST "..\Dist\include\spdlog\details" (mkdir "..\Dist\include\spdlog\details")
 IF NOT EXIST "..\Dist\include\spdlog\fmt" (mkdir "..\Dist\include\spdlog\fmt")
 IF NOT EXIST "..\Dist\include\spdlog\fmt\bundled" (mkdir "..\Dist\include\spdlog\fmt\bundled")
 IF NOT EXIST "..\Dist\include\spdlog\sinks" (mkdir "..\Dist\include\spdlog\sinks")
 copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"
+copy /B /Y "..\FZLib\Graphics\**.h" "..\Dist\include\FZLib\Graphics\"
+copy /B /Y "..\FZLib\Graphics\Core\**.h" "..\Dist\include\FZLib\Graphics\Core\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\Helpers\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers\"
 copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h" "..\Dist\include\spdlog\"
 copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h" "..\Dist\include\spdlog\cfg\"
 copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h" "..\Dist\include\spdlog\details\"
@@ -124,16 +126,18 @@ rmdir /S /Q "..\Dist\log\"</Command>
     </Link>
     <PreBuildEvent>
       <Command>IF NOT EXIST "..\Dist\lib\Release\x86_64\" (mkdir "..\Dist\lib\Release\x86_64\")
-IF NOT EXIST "..\Dist\include\" (mkdir "..\Dist\include\")
-IF NOT EXIST "..\Dist\include\FZLib" (mkdir "..\Dist\include\FZLib")
 IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
-IF NOT EXIST "..\Dist\include\spdlog" (mkdir "..\Dist\include\spdlog")
+IF NOT EXIST "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers" (mkdir "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers")
 IF NOT EXIST "..\Dist\include\spdlog\cfg" (mkdir "..\Dist\include\spdlog\cfg")
 IF NOT EXIST "..\Dist\include\spdlog\details" (mkdir "..\Dist\include\spdlog\details")
 IF NOT EXIST "..\Dist\include\spdlog\fmt" (mkdir "..\Dist\include\spdlog\fmt")
 IF NOT EXIST "..\Dist\include\spdlog\fmt\bundled" (mkdir "..\Dist\include\spdlog\fmt\bundled")
 IF NOT EXIST "..\Dist\include\spdlog\sinks" (mkdir "..\Dist\include\spdlog\sinks")
 copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"
+copy /B /Y "..\FZLib\Graphics\**.h" "..\Dist\include\FZLib\Graphics\"
+copy /B /Y "..\FZLib\Graphics\Core\**.h" "..\Dist\include\FZLib\Graphics\Core\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\Helpers\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers\"
 copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h" "..\Dist\include\spdlog\"
 copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h" "..\Dist\include\spdlog\cfg\"
 copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h" "..\Dist\include\spdlog\details\"
@@ -148,19 +152,19 @@ rmdir /S /Q "..\Dist\log\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h" />
     <ClInclude Include="EntryPoint\framework.h" />
     <ClInclude Include="EntryPoint\pch.h" />
     <ClInclude Include="Graphics\Core\Buffer.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h" />
     <ClInclude Include="Graphics\Core\DirectX11\CoreRef.h" />
     <ClInclude Include="Graphics\Core\DirectX11\Device.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Helpers\DeviceManager.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Helpers\ResourceGenerator.h" />
+    <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h" />
+    <ClInclude Include="Graphics\Core\Renderer2D.h" />
     <ClInclude Include="Graphics\gcr.h" />
     <ClInclude Include="Helpers\LogHelper.h" />
     <ClInclude Include="Helpers\StringHelper.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceResource.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h" />
-    <ClInclude Include="Graphics\Core\Renderer2D.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger-inl.h" />
     <ClInclude Include="Vendor\spdlog\include\spdlog\async_logger.h" />
@@ -266,19 +270,23 @@ rmdir /S /Q "..\Dist\log\"</Command>
     <ClInclude Include="Vendor\spdlog\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics\Core\DirectX11\Buffer.cpp" />
     <ClCompile Include="EntryPoint\dllmain.cpp" />
     <ClCompile Include="EntryPoint\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Graphics\Core\Buffer.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Buffer.cpp">
+      <ObjectFileName>$(IntDir)\Buffer1.obj</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="Graphics\Core\DirectX11\Device.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Helpers\DeviceManager.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Helpers\ResourceGenerator.cpp" />
+    <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp" />
+    <ClCompile Include="Graphics\Core\Renderer2D.cpp">
+      <ObjectFileName>$(IntDir)\Renderer2D1.obj</ObjectFileName>
+    </ClCompile>
     <ClCompile Include="Helpers\LogHelper.cpp" />
     <ClCompile Include="Helpers\StringHelper.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceResource.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp" />
-    <ClCompile Include="Graphics\Core\Renderer2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,6 +4,18 @@
     <Filter Include="EntryPoint">
       <UniqueIdentifier>{419769CF-2D4F-AB1C-9656-8478822D460D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{1653CE33-0220-293F-2B39-17E717655ECD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Core">
+      <UniqueIdentifier>{2ED58497-9A95-00CE-63D0-494BCF4F45AA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Core\DirectX11">
+      <UniqueIdentifier>{724843B6-DE7F-8B4D-E789-EF705340B246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Core\DirectX11\Helpers">
+      <UniqueIdentifier>{344B6722-A02E-7662-A931-A49E15943CB3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{D8389B9D-4418-1A39-4D30-A50FB98E809A}</UniqueIdentifier>
     </Filter>
@@ -41,6 +53,33 @@
     </ClInclude>
     <ClInclude Include="EntryPoint\pch.h">
       <Filter>EntryPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\Buffer.h">
+      <Filter>Graphics\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\DirectX11\CoreRef.h">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\DirectX11\Device.h">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\DirectX11\Helpers\DeviceManager.h">
+      <Filter>Graphics\Core\DirectX11\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\DirectX11\Helpers\ResourceGenerator.h">
+      <Filter>Graphics\Core\DirectX11\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Core\Renderer2D.h">
+      <Filter>Graphics\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\gcr.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Helpers\LogHelper.h">
       <Filter>Helpers</Filter>
@@ -357,15 +396,6 @@
     <ClInclude Include="Vendor\spdlog\include\spdlog\version.h">
       <Filter>Vendor\spdlog\include\spdlog</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Core\Renderer2D.h" />
-    <ClInclude Include="Graphics\Core\Buffer.h" />
-    <ClInclude Include="Graphics\gcr.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\CoreRef.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Renderer2D.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Helper\DeviceResource.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Device.h" />
-    <ClInclude Include="Graphics\Core\DirectX11\Buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntryPoint\dllmain.cpp">
@@ -374,18 +404,32 @@
     <ClCompile Include="EntryPoint\pch.cpp">
       <Filter>EntryPoint</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Core\Buffer.cpp">
+      <Filter>Graphics\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Core\DirectX11\Buffer.cpp">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Core\DirectX11\Device.cpp">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Core\DirectX11\Helpers\DeviceManager.cpp">
+      <Filter>Graphics\Core\DirectX11\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Core\DirectX11\Helpers\ResourceGenerator.cpp">
+      <Filter>Graphics\Core\DirectX11\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp">
+      <Filter>Graphics\Core\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Core\Renderer2D.cpp">
+      <Filter>Graphics\Core</Filter>
+    </ClCompile>
     <ClCompile Include="Helpers\LogHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Helpers\StringHelper.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Core\Renderer2D.cpp" />
-    <ClCompile Include="Graphics\Core\Buffer.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Buffer.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Helper\ResourceGenerator.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Renderer2D.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Helper\DeviceResource.cpp" />
-    <ClCompile Include="Graphics\Core\DirectX11\Device.cpp" />
   </ItemGroup>
 </Project>

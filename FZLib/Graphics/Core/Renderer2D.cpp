@@ -16,7 +16,7 @@ namespace FZLib
 {
 	Renderer2D* Renderer2D::Create(const std::string& name)
 	{
-		return nullptr;
+		return new DirectX11::Renderer2D(name);
 	}
 
 } // namespace FZLib
