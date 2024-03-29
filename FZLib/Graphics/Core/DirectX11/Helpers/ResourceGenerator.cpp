@@ -21,7 +21,7 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateVertexBuffer(FZuint size, FZbool dynamic, FZbool streamout, D3D11_SUBRESOURCE_DATA* pData)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an vertex buffer.");
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = size;
 				desc.MiscFlags = 0;
@@ -36,7 +36,7 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateStaticVertexBuffer(FZfloat* vertices, FZuint size, FZbool streamOut)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an static vertex buffer.");
 				D3D11_SUBRESOURCE_DATA vData;
 				ZeroMemory(&vData, sizeof(D3D11_SUBRESOURCE_DATA));
 				vData.pSysMem = vertices;
@@ -47,13 +47,13 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateDynamicVertexBuffer(FZuint size, FZbool streamOut)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an dynamic vertex buffer.");
 				return (this->CreateVertexBuffer(size, FZtrue, streamOut, nullptr));
 			}
 
 			ID3D11Buffer* ResourceGenerator::CreateIndexBuffer(FZuint size, FZbool dynamic, D3D11_SUBRESOURCE_DATA* pData)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an index buffer.");
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = size;
 				desc.MiscFlags = 0;
@@ -68,7 +68,7 @@ namespace FZLib {
 
 			ID3D11Buffer * ResourceGenerator::CreateStaticIndexBuffer(FZuint* indices, FZuint size)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an static index buffer.");
 				D3D11_SUBRESOURCE_DATA vData;
 				ZeroMemory(&vData, sizeof(D3D11_SUBRESOURCE_DATA));
 				vData.pSysMem = indices;
@@ -79,13 +79,13 @@ namespace FZLib {
 
 			ID3D11Buffer * ResourceGenerator::CreateDynamicIndexBuffer(FZuint size)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an dynamic index buffer.");
 				return (this->CreateIndexBuffer(size, FZtrue, nullptr));;
 			}
 
 			ID3D11Buffer* ResourceGenerator::CreateConstantBuffer(FZuint size, FZbool dynamic, FZbool CPUupdates, D3D11_SUBRESOURCE_DATA * pData)
 			{
-				FZLOG_FAILED(size);
+				FZLOG_FAILED(size, "Error: Failed to create an constant buffer.");
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = size;
 				desc.MiscFlags = 0;
@@ -113,7 +113,7 @@ namespace FZLib {
 
 			ID3D11Buffer* ResourceGenerator::CreateStructuredBuffer(FZuint count, FZuint structSize, FZbool CPUwritable, FZbool GPUwritable, D3D11_SUBRESOURCE_DATA* pData)
 			{
-				FZLOG_FAILED(count || structSize);
+				FZLOG_FAILED(count || structSize, "Error: Failed to create an structured buffer.");
 				D3D11_BUFFER_DESC desc;
 				desc.ByteWidth = count * structSize;
 				desc.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;

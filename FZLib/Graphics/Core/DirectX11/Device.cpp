@@ -73,9 +73,9 @@ namespace FZLib {
 		{
 			FZbool	result;
 			result = this->CreateDeviceAndSwapChain();
-			FZLOG_FAILED(result);
+			FZLOG_FAILED(result, "Error: Failed to initialize a device and swapchain");
 			result = this->CreateBackBufferAndViewport();
-			FZLOG_FAILED(result);
+			FZLOG_FAILED(result, "Error: Failed to initialize a backbuffer and viewport");
 			return (result);
 		}
 

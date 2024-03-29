@@ -72,7 +72,7 @@ namespace FZLib {
 		void Renderer2D::End()
 		{
 			auto* device = DeviceManager::GetDevice(m_RendererID);
-			FZLOG_FAILED(device);
+			FZLOG_FAILED(device, "Error: did not found device!");
 			device->Present();
 		}
 
