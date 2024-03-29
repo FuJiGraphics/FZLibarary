@@ -50,14 +50,14 @@ extern "C" {
 		#define FZLOG_SUCCEEDED(boolean_value, ...)	boolean_value;\
 			if(boolean_value)\
 			{\
-				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
+				FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$"); \
 				FZLOG_INFO(__VA_ARGS__)\
 				FZLib::LogSystem::RevertFormat();\
 			}
 		#define FZLOG_FAILED(boolean_value, ...)	boolean_value;\
 			if(!boolean_value)\
 			{\
-				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
+				FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$"); \
 				FZLOG_CRITICAL(__VA_ARGS__);\
 				FZLib::LogSystem::RevertFormat();\
 			}
