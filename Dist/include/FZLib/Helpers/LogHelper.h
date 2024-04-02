@@ -47,22 +47,22 @@ extern "C" {
 	#define FZLOG_CRITICAL(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::critical, __VA_ARGS__);
 
 	#if defined(DEBUG) || defined(_DEBUG)
-		#define FZLOG_SUCCEED(boolean_value)	boolean_value;\
+		#define FZLOG_SUCCEEDED(boolean_value, ...)	boolean_value;\
 			if(boolean_value)\
 			{\
-				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
-				FZLOG_CRITICAL("Succeed to execute operation.")\
+				FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$"); \
+				FZLOG_INFO(__VA_ARGS__)\
 				FZLib::LogSystem::RevertFormat();\
 			}
-		#define FZLOG_FAILED(boolean_value)		boolean_value;\
-			if(!boolean_value)\
+		#define FZLOG_FAILED(boolean_value, ...)	boolean_value;\
+			if(!(boolean_value))\
 			{\
-				FZLib::LogSystem::SetPattern("%^[%T][%s:%#][%!] %v%$"); \
-				FZLOG_CRITICAL("Failed to execute operation.");\
+				FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$"); \
+				FZLOG_CRITICAL(__VA_ARGS__);\
 				FZLib::LogSystem::RevertFormat();\
 			}
 	#else
-		#define FZLOG_SUCCEED(boolean_value) boolean_value;
+		#define FZLOG_SUCCEEDED(boolean_value) boolean_value;
 		#define FZLOG_FAILED(boolean_value)	boolean_value;
 	#endif
 #pragma endregion 

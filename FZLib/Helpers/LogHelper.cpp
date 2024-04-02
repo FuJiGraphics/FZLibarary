@@ -7,8 +7,8 @@
 namespace FZLib {
 
 	std::shared_ptr<spdlog::logger>		LogSystem::s_pLogger = nullptr;
-	std::string							LogSystem::s_currFormat = "%^[FILE:%s][LINE:%#][CALL:%!]{ %T }";
-	std::string							LogSystem::s_prevFormat = "%^[FILE:%s][LINE:%#][CALL:%!]{ %T }";
+	std::string							LogSystem::s_currFormat = "[%T][%s:%#][%!]\n %^%v%$";
+	std::string							LogSystem::s_prevFormat = "[%T][%s:%#][%!]\n %^%v%$";
 
 	bool LogSystem::Initialize()
 	{
@@ -25,7 +25,7 @@ namespace FZLib {
 	{
 		LogSystem::Initialize();
 		s_prevFormat = s_currFormat;
-		s_currFormat = "%^[FILE:%s][LINE:%#][CALL:%!]{ %T }";
+		s_currFormat = "[%T][%s:%#][%!]\n %^%v%$";
 	}
 
 	void LogSystem::RevertFormat()

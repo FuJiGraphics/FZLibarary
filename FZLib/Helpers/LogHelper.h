@@ -55,7 +55,7 @@ extern "C" {
 				FZLib::LogSystem::RevertFormat();\
 			}
 		#define FZLOG_FAILED(boolean_value, ...)	boolean_value;\
-			if(!boolean_value)\
+			if(!(boolean_value))\
 			{\
 				FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$"); \
 				FZLOG_CRITICAL(__VA_ARGS__);\
