@@ -71,4 +71,38 @@ namespace FZLib {
 	{
 		return (s_prevFormat);
 	}
+
+	//bool LOG_SWITCHING__(bool obj, const char* fmt, ...)
+	//{
+	//	if (obj == false)
+	//	{
+	//		va_list data;
+	//		va_start(data, fmt);
+	//		FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$");
+	//		FZLib::LogSystem::GetLogger()->log(spdlog::source_loc{ __FILE__, __LINE__, SPDLOG_FUNCTION },
+	//										   spdlog::level::info,
+	//										   data);
+	//		FZLib::LogSystem::RevertFormat();
+	//		va_end(data);
+	//		return (false);
+	//	}
+	//	return (true);
+	//}
+
+	//bool LOG_SWITCHING__(void* obj, const char* fmt, ...)
+	//{
+	//	if (obj == NULL || obj == nullptr)
+	//	{
+	//		va_list data;
+	//		va_start(data, fmt);
+	//		FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$");
+	//		FZLib::LogSystem::GetLogger()->log(spdlog::source_loc{ __FILE__, __LINE__, SPDLOG_FUNCTION },
+	//										   spdlog::level::info,
+	//										   data);
+	//		FZLib::LogSystem::RevertFormat();
+	//		va_end(data);
+	//		return (false);
+	//	}
+	//	return (true);
+	//}
 }

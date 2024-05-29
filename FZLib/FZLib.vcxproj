@@ -20,13 +20,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -42,18 +42,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\Dist\log\</OutDir>
     <IntDir>..\Dist\log\Debug\</IntDir>
     <TargetName>FZLib</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\Dist\log\</OutDir>
     <IntDir>..\Dist\log\Release\</IntDir>
     <TargetName>FZLib</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -64,16 +62,17 @@
       <AdditionalIncludeDirectories>.;EntryPoint;Vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
       <AdditionalDependencies>spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>Vendor\spdlog\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ImportLibrary>..\Dist\log\FZLib.lib</ImportLibrary>
-    </Link>
+    </Lib>
     <PreBuildEvent>
       <Command>IF NOT EXIST "..\Dist\lib\Debug\x86_64\" (mkdir "..\Dist\lib\Debug\x86_64\")
 IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
@@ -83,22 +82,21 @@ IF NOT EXIST "..\Dist\include\spdlog\details" (mkdir "..\Dist\include\spdlog\det
 IF NOT EXIST "..\Dist\include\spdlog\fmt" (mkdir "..\Dist\include\spdlog\fmt")
 IF NOT EXIST "..\Dist\include\spdlog\fmt\bundled" (mkdir "..\Dist\include\spdlog\fmt\bundled")
 IF NOT EXIST "..\Dist\include\spdlog\sinks" (mkdir "..\Dist\include\spdlog\sinks")
-copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"
-copy /B /Y "..\FZLib\Graphics\**.h" "..\Dist\include\FZLib\Graphics\"
-copy /B /Y "..\FZLib\Graphics\Core\**.h" "..\Dist\include\FZLib\Graphics\Core\"
-copy /B /Y "..\FZLib\Graphics\Core\DirectX11\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\"
-copy /B /Y "..\FZLib\Graphics\Core\DirectX11\Helpers\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h" "..\Dist\include\spdlog\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h" "..\Dist\include\spdlog\cfg\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h" "..\Dist\include\spdlog\details\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\**.h" "..\Dist\include\spdlog\fmt\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\**.h" "..\Dist\include\spdlog\fmt\bundled\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\sinks\**.h" "..\Dist\include\spdlog\sinks\"</Command>
+copy /B /Y "..\FZLib\Helpers\**.h"								"..\Dist\include\FZLib\Helpers\"
+copy /B /Y "..\FZLib\Graphics\**.h"							"..\Dist\include\FZLib\Graphics\"
+copy /B /Y "..\FZLib\Graphics\Core\**.h"						"..\Dist\include\FZLib\Graphics\Core\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\**.h"			"..\Dist\include\FZLib\Graphics\Core\DirectX11\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\Helpers\**.h"	"..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h"				"..\Dist\include\spdlog\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h"			"..\Dist\include\spdlog\cfg\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h"		"..\Dist\include\spdlog\details\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\**.h"			"..\Dist\include\spdlog\fmt\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\**.h"	"..\Dist\include\spdlog\fmt\bundled\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\sinks\**.h"		"..\Dist\include\spdlog\sinks\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Debug\x86_64\"
-copy /B /Y "..\Dist\log\**.dll" "..\Dist\lib\Debug\x86_64\"
-rmdir /S /Q "..\Dist\log\"</Command>
+      <Command>copy /B /Y "..\Dist\log\**.lib" "..\Build\FZTest\Debug\"
+copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Debug\x86_64\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -113,17 +111,18 @@ rmdir /S /Q "..\Dist\log\"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
       <AdditionalDependencies>spdlog.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>Vendor\spdlog\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ImportLibrary>..\Dist\log\FZLib.lib</ImportLibrary>
-    </Link>
+    </Lib>
     <PreBuildEvent>
       <Command>IF NOT EXIST "..\Dist\lib\Release\x86_64\" (mkdir "..\Dist\lib\Release\x86_64\")
 IF NOT EXIST "..\Dist\include\FZLib\Helpers" (mkdir "..\Dist\include\FZLib\Helpers")
@@ -133,22 +132,21 @@ IF NOT EXIST "..\Dist\include\spdlog\details" (mkdir "..\Dist\include\spdlog\det
 IF NOT EXIST "..\Dist\include\spdlog\fmt" (mkdir "..\Dist\include\spdlog\fmt")
 IF NOT EXIST "..\Dist\include\spdlog\fmt\bundled" (mkdir "..\Dist\include\spdlog\fmt\bundled")
 IF NOT EXIST "..\Dist\include\spdlog\sinks" (mkdir "..\Dist\include\spdlog\sinks")
-copy /B /Y "..\FZLib\Helpers\**.h" "..\Dist\include\FZLib\Helpers\"
-copy /B /Y "..\FZLib\Graphics\**.h" "..\Dist\include\FZLib\Graphics\"
-copy /B /Y "..\FZLib\Graphics\Core\**.h" "..\Dist\include\FZLib\Graphics\Core\"
-copy /B /Y "..\FZLib\Graphics\Core\DirectX11\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\"
-copy /B /Y "..\FZLib\Graphics\Core\DirectX11\Helpers\**.h" "..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h" "..\Dist\include\spdlog\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h" "..\Dist\include\spdlog\cfg\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h" "..\Dist\include\spdlog\details\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\**.h" "..\Dist\include\spdlog\fmt\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\**.h" "..\Dist\include\spdlog\fmt\bundled\"
-copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\sinks\**.h" "..\Dist\include\spdlog\sinks\"</Command>
+copy /B /Y "..\FZLib\Helpers\**.h"								"..\Dist\include\FZLib\Helpers\"
+copy /B /Y "..\FZLib\Graphics\**.h"							"..\Dist\include\FZLib\Graphics\"
+copy /B /Y "..\FZLib\Graphics\Core\**.h"						"..\Dist\include\FZLib\Graphics\Core\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\**.h"			"..\Dist\include\FZLib\Graphics\Core\DirectX11\"
+copy /B /Y "..\FZLib\Graphics\Core\DirectX11\Helpers\**.h"	"..\Dist\include\FZLib\Graphics\Core\DirectX11\Helpers\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\**.h"				"..\Dist\include\spdlog\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\cfg\**.h"			"..\Dist\include\spdlog\cfg\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\details\**.h"		"..\Dist\include\spdlog\details\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\**.h"			"..\Dist\include\spdlog\fmt\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\**.h"	"..\Dist\include\spdlog\fmt\bundled\"
+copy /B /Y "..\FZLib\Vendor\spdlog\include\spdlog\sinks\**.h"		"..\Dist\include\spdlog\sinks\"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Release\x86_64\"
-copy /B /Y "..\Dist\log\**.dll" "..\Dist\lib\Release\x86_64\"
-rmdir /S /Q "..\Dist\log\"</Command>
+      <Command>copy /B /Y "..\Dist\log\**.lib" "..\Build\FZTest\Release\"
+copy /B /Y "..\Dist\log\**.lib" "..\Dist\lib\Release\x86_64\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
