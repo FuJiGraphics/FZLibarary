@@ -1,0 +1,12 @@
+﻿  main.cpp
+d:\dev\fzlib\fztest\vendor\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fztest\vendor\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fztest\vendor\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fztest\vendor\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+d:\dev\fzlib\fztest\vendor\include\fzlib\helpers\loghelper.h(36): warning C4251: 'FZLib::LogSystem::s_prevFormat': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'FZLib::LogSystem'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\xstring(4373): note: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
+d:\dev\fzlib\fztest\vendor\include\fzlib\helpers\loghelper.h(37): warning C4251: 'FZLib::LogSystem::s_currFormat': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'에서는 class 'FZLib::LogSystem'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
+  c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.16.27023\include\xstring(4373): note: 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' 선언을 참조하십시오.
+d:\dev\fzlib\fztest\vendor\include\fzlib\helpers\loghelper.h(38): warning C4251: 'FZLib::LogSystem::s_pLogger': class 'std::shared_ptr<spdlog::logger>'에서는 class 'FZLib::LogSystem'의 클라이언트에서 DLL 인터페이스를 사용하도록 지정해야 합니다.
+  d:\dev\fzlib\fztest\vendor\include\spdlog\details\registry.h(37): note: 'std::shared_ptr<spdlog::logger>' 선언을 참조하십시오.
+  FZTest.vcxproj -> D:\Dev\FZLib\FZTest\..\Build\FZTest\Debug\FZTest.exe

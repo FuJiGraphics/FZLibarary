@@ -17,10 +17,10 @@ workspace "FZLib"
 
 	project "FZLib"
 		location "FZLib"
-		kind "SharedLib"
+		kind "StaticLib"
 		language "C++"
 		cppdialect "C++17"
-		staticruntime "off"
+		staticruntime "on"
     systemversion "latest"  
 
     targetdir ("Dist/log/")
@@ -31,6 +31,7 @@ workspace "FZLib"
 	
 	prebuildcommands
 	{
+		-- For Dist
 		"{MKDIR} %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
 		"{MKDIR} %[Dist/include/FZLib/Helpers]",
 		"{MKDIR} %[Dist/include/FZLib/Graphics/Core/DirectX11/Helpers]",
@@ -39,17 +40,19 @@ workspace "FZLib"
 		"{MKDIR} %[Dist/include/spdlog/fmt]",
 		"{MKDIR} %[Dist/include/spdlog/fmt/bundled]",
 		"{MKDIR} %[Dist/include/spdlog/sinks]",
-		"{COPYFILE} %["..helperDir.."/**.h] %[Dist/include/FZLib/Helpers/]",
-		"{COPYFILE} %["..graphicsDir.."/**.h] %[Dist/include/FZLib/Graphics/]",
-		"{COPYFILE} %["..graphicsDir.."/Core/**.h] %[Dist/include/FZLib/Graphics/Core/]",
-		"{COPYFILE} %["..graphicsDir.."/Core/DirectX11/**.h] %[Dist/include/FZLib/Graphics/Core/DirectX11/]",
-		"{COPYFILE} %["..graphicsDir.."/Core/DirectX11/Helpers/**.h] %[Dist/include/FZLib/Graphics/Core/DirectX11/Helpers/]",
-		"{COPYFILE} %["..spdlogDir.."/include/spdlog/**.h] %[Dist/include/spdlog/]",
-		"{COPYFILE} %["..spdlogDir.."/include/spdlog/cfg/**.h] %[Dist/include/spdlog/cfg/]",
-		"{COPYFILE} %["..spdlogDir.."/include/spdlog/details/**.h] %[Dist/include/spdlog/details/]",
-		"{COPYFILE} %["..spdlogDir.."/include/spdlog/fmt/**.h] %[Dist/include/spdlog/fmt/]",
-		"{COPYFILE} %["..spdlogDir.."/include/spdlog/fmt/bundled/**.h] %[Dist/include/spdlog/fmt/bundled/]",
-		"{COPYFILE} %["..spdlogDir.."/include/spdlog/sinks/**.h] %[Dist/include/spdlog/sinks/]",
+
+		-- For Dist
+		"{COPYFILE} %["..helperDir.."/**.h]								%[Dist/include/FZLib/Helpers/]",
+		"{COPYFILE} %["..graphicsDir.."/**.h]							%[Dist/include/FZLib/Graphics/]",
+		"{COPYFILE} %["..graphicsDir.."/Core/**.h]						%[Dist/include/FZLib/Graphics/Core/]",
+		"{COPYFILE} %["..graphicsDir.."/Core/DirectX11/**.h]			%[Dist/include/FZLib/Graphics/Core/DirectX11/]",
+		"{COPYFILE} %["..graphicsDir.."/Core/DirectX11/Helpers/**.h]	%[Dist/include/FZLib/Graphics/Core/DirectX11/Helpers/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/**.h]				%[Dist/include/spdlog/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/cfg/**.h]			%[Dist/include/spdlog/cfg/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/details/**.h]		%[Dist/include/spdlog/details/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/fmt/**.h]			%[Dist/include/spdlog/fmt/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/fmt/bundled/**.h]	%[Dist/include/spdlog/fmt/bundled/]",
+		"{COPYFILE} %["..spdlogDir.."/include/spdlog/sinks/**.h]		%[Dist/include/spdlog/sinks/]",
 	}
 
 	defines
@@ -82,9 +85,11 @@ workspace "FZLib"
 
 	postbuildcommands 
 	{ 
+		"{COPYFILE} %[Dist/log/**.lib] %[Build/FZTest/%{cfg.buildcfg}/]",
 		"{COPYFILE} %[Dist/log/**.lib] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
-		"{COPYFILE} %[Dist/log/**.dll] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
-		"{RMDIR} %[Dist/log/]",
+		-- "{COPYFILE} %[Dist/log/**.dll] %[Build/FZTest/%{cfg.buildcfg}/]",
+		-- "{COPYFILE} %[Dist/log/**.dll] %[Dist/lib/%{cfg.buildcfg}/%{cfg.architecture}/]",
+		--"{RMDIR} %[Dist/log/]",
 	}
 
     filter "system:Windows"
@@ -103,3 +108,52 @@ workspace "FZLib"
         runtime "Release"
         optimize "On"
 
+
+
+
+	project "FZTest"
+		location "FZTest"
+		kind "ConsoleApp"
+		language "C++"
+		cppdialect "C++17"
+		staticruntime "off"
+    systemversion "latest"  
+
+    targetdir ("Build/FZTest/%{cfg.buildcfg}/")
+    objdir ("Build/FZTest/%{cfg.buildcfg}/")
+
+    files
+    {
+        "%{prj.name}/**.h",
+        "%{prj.name}/**.cpp",
+    }
+
+	includedirs
+    {
+        "Dist/include"
+    }
+
+	libdirs 
+	{ 
+	}
+
+	links
+	{
+		"FZLib"
+	}
+
+    filter "system:Windows"
+    defines
+    {
+        "FZ_PLATFORM_WINDOWS",
+    }
+
+    filter "configurations:Debug"
+        defines "FZ_DEBUG"
+        runtime "Debug"
+        symbols "On"
+
+    filter "configurations:Release"
+        defines "FZ_RELEASE"
+        runtime "Release"
+        optimize "On"

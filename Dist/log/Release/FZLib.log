@@ -1,0 +1,188 @@
+﻿  ..\FZLib\Helpers\LogHelper.h
+  ..\FZLib\Helpers\StringHelper.h
+          2개 파일이 복사되었습니다.
+  ..\FZLib\Graphics\gcr.h
+          1개 파일이 복사되었습니다.
+  ..\FZLib\Graphics\Core\Buffer.h
+  ..\FZLib\Graphics\Core\Renderer2D.h
+          2개 파일이 복사되었습니다.
+  ..\FZLib\Graphics\Core\DirectX11\Buffer.h
+  ..\FZLib\Graphics\Core\DirectX11\CoreRef.h
+  ..\FZLib\Graphics\Core\DirectX11\Device.h
+  ..\FZLib\Graphics\Core\DirectX11\Renderer2D.h
+          4개 파일이 복사되었습니다.
+  ..\FZLib\Graphics\Core\DirectX11\Helpers\DeviceManager.h
+  ..\FZLib\Graphics\Core\DirectX11\Helpers\ResourceGenerator.h
+          2개 파일이 복사되었습니다.
+  ..\FZLib\Vendor\spdlog\include\spdlog\async.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\async_logger-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\async_logger.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\common-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\common.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\formatter.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fwd.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\logger-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\logger.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\pattern_formatter-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\pattern_formatter.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\spdlog-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\spdlog.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\stopwatch.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\tweakme.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\version.h
+         16개 파일이 복사되었습니다.
+  ..\FZLib\Vendor\spdlog\include\spdlog\cfg\argv.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\cfg\env.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\cfg\helpers-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\cfg\helpers.h
+          4개 파일이 복사되었습니다.
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\backtracer-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\backtracer.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\circular_q.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\console_globals.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\file_helper-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\file_helper.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\fmt_helper.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\log_msg-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\log_msg.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\log_msg_buffer-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\log_msg_buffer.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\mpmc_blocking_q.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\null_mutex.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\os-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\os.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\periodic_worker-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\periodic_worker.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\registry-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\registry.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\synchronous_factory.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\tcp_client-windows.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\tcp_client.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\thread_pool-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\thread_pool.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\udp_client-windows.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\udp_client.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\details\windows_include.h
+         27개 파일이 복사되었습니다.
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bin_to_hex.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\chrono.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\compile.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\fmt.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\ostr.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\ranges.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\std.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\xchar.h
+          8개 파일이 복사되었습니다.
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\args.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\chrono.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\color.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\compile.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\core.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\format.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\locale.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\os.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\ostream.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\printf.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\ranges.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\std.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\fmt\bundled\xchar.h
+         14개 파일이 복사되었습니다.
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\android_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\ansicolor_sink-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\ansicolor_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\base_sink-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\base_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\basic_file_sink-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\basic_file_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\callback_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\daily_file_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\dist_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\dup_filter_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\hourly_file_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\kafka_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\mongo_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\msvc_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\null_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\ostream_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\qt_sinks.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\ringbuffer_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\rotating_file_sink-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\rotating_file_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\sink-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\stdout_color_sinks-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\stdout_color_sinks.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\stdout_sinks-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\stdout_sinks.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\syslog_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\systemd_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\tcp_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\udp_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\wincolor_sink-inl.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\wincolor_sink.h
+  ..\FZLib\Vendor\spdlog\include\spdlog\sinks\win_eventlog_sink.h
+         34개 파일이 복사되었습니다.
+  pch.cpp
+  dllmain.cpp
+  Buffer.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  Device.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+d:\dev\fzlib\fzlib\graphics\core\directx11\device.cpp(76): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\device.cpp(78): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+  DeviceManager.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  ResourceGenerator.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(24): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(39): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(50): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(56): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(71): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(82): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(88): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+d:\dev\fzlib\fzlib\graphics\core\directx11\helpers\resourcegenerator.cpp(116): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+  Renderer2D.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+d:\dev\fzlib\fzlib\graphics\core\directx11\renderer2d.cpp(75): warning C4002: 함수 같은 매크로 호출 'FZLOG_FAILED'에 대해 인수가 너무 많습니다.
+  LogHelper.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  StringHelper.cpp
+  코드를 생성하고 있습니다...
+  Buffer.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  Renderer2D.cpp
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1154): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1186): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\fmt\bundled\format-inl.h(1207): warning C4307: '*': 정수 계열 상수 오버플로입니다.
+d:\dev\fzlib\fzlib\vendor\spdlog\include\spdlog\details\circular_q.h : warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+LogHelper.obj : warning LNK4006: "bool __cdecl fmt::v9::detail::is_printable(unsigned int)" (?is_printable@detail@v9@fmt@@YA_NI@Z)이(가) spdlog.lib(bundled_fmtlib_format.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
+LogHelper.obj : warning LNK4006: "void __cdecl spdlog::throw_spdlog_ex(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?throw_spdlog_ex@spdlog@@YAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)이(가) spdlog.lib(spdlog.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
+  FZLib.vcxproj -> D:\Dev\FZLib\FZLib\..\Dist\log\FZLib.lib
+  ..\Dist\log\FZLib.lib
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+  ..\Dist\log\FZLib.lib
+          1개 파일이 복사되었습니다.

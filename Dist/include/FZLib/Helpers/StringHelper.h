@@ -2,10 +2,14 @@
 #ifndef __FZ_LIBRARY_STRING_HELPER__
 #define __FZ_LIBRARY_STRING_HELPER__
 
-#ifdef FZLIB_EXPORTS
-	#define FZLIB_API __declspec(dllexport)
+#ifdef FZLIB_USAGE_DLL
+	#ifdef FZLIB_EXPORTS
+		#define FZLIB_API __declspec(dllexport)
+	#else
+		#define FZLIB_API __declspec(dllimport)
+	#endif
 #else
-	#define FZLIB_API __declspec(dllimport)
+	#define FZLIB_API
 #endif
 
 // Standard include headers

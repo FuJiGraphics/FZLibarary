@@ -3,13 +3,13 @@
 #define __FZ_LIBRARY_LOG_HELPER__
 
 #ifdef FZLIB_USAGE_DLL
-	#ifdef FZLIB_EXPORTS
-		#define FZLIB_API __declspec(dllexport)
-	#else
-		#define FZLIB_API __declspec(dllimport)
-	#endif
+#ifdef FZLIB_EXPORTS
+#define FZLIB_API __declspec(dllexport)
 #else
-	#define FZLIB_API
+#define FZLIB_API __declspec(dllimport)
+#endif
+#else
+#define FZLIB_API
 #endif
 
 #include "spdlog/spdlog.h"
@@ -50,46 +50,29 @@ namespace FZLib {
 #define FZLOG_CRITICAL(...)		SPDLOG_LOGGER_CALL( FZLib::LogSystem::GetLogger(), spdlog::level::critical, __VA_ARGS__);
 
 #if defined(DEBUG) || defined(_DEBUG)
-	bool LOG_SWITCHING__(bool obj, const char* fmt, ...)
+
+	template <typename... Args>
+	static bool LOG_SWITCHING__(bool obj, const char* fmt, Args&&...args)
 	{
 		if (obj == false)
 		{
-			va_list data;
-			va_start(data, fmt);
 			FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$");
 			FZLib::LogSystem::GetLogger()->log(spdlog::source_loc{ __FILE__, __LINE__, SPDLOG_FUNCTION },
 											   spdlog::level::info,
-											   data);
+											   fmt, std::forward<Args>(args)...);
 			FZLib::LogSystem::RevertFormat();
-			va_end(data);
-			return (false);
-}
-		return (true);
-	}
-
-	bool LOG_SWITCHING__(void* obj, const char* fmt, ...)
-	{
-		if (obj == NULL || obj == nullptr)
-		{
-			va_list data;
-			va_start(data, fmt);
-			FZLib::LogSystem::SetPattern("[%T][%s:%#][%!]\n %^%v%$");
-			FZLib::LogSystem::GetLogger()->log(spdlog::source_loc{ __FILE__, __LINE__, SPDLOG_FUNCTION },
-											   spdlog::level::info,
-											   data);
-			FZLib::LogSystem::RevertFormat();
-			va_end(data);
 			return (false);
 		}
 		return (true);
 	}
+
 	#define FZLOG_SUCCEEDED(boolean_value, ...)	FZLib::LOG_SWITCHING__(!boolean_value, __VA_ARGS__)
 	#define FZLOG_FAILED(boolean_value, ...)	FZLib::LOG_SWITCHING__(boolean_value, __VA_ARGS__)
 #else
 	#define FZLOG_SUCCEEDED(boolean_value)	boolean_value;
 	#define FZLOG_FAILED(boolean_value)		boolean_value;
 #endif
-#pragma endregion 
 
+#pragma endregion 
 } // namespace FZLib
 #endif
