@@ -61,9 +61,9 @@ namespace FZLib {
 											   spdlog::level::info,
 											   fmt, std::forward<Args>(args)...);
 			FZLib::LogSystem::RevertFormat();
-			return (false);
+			return (true);
 		}
-		return (true);
+		return (false);
 	}
 
 	#define FZLOG_SUCCEEDED(boolean_value, ...)	FZLib::LOG_SWITCHING__(!boolean_value, __VA_ARGS__)
